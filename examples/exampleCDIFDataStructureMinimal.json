@@ -1,0 +1,91 @@
+{
+  "@context": {
+    "schema": "http://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "cdif": "https://cdif.org/0.1/",
+    "ex": "https://example.org/",
+    "prov": "http://www.w3.org/ns/prov#"
+  },
+  "@id": "ex:dataset/vitalsWide",
+  "@type": [
+    "schema:Dataset"
+  ],
+  "schema:name": "Patient vitals (wide table)",
+  "schema:identifier": "https://doi.org/10.1234/vitals-wide-2025",
+  "schema:dateModified": "2025-09-01",
+  "schema:license": [
+    "https://creativecommons.org/licenses/by/4.0/"
+  ],
+  "schema:variableMeasured": [
+    {
+      "@id": "ex:var/patientId",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "patient_id",
+      "cdif:uses": [
+        {
+          "@id": "ex:struct/vitalsWide/rv/patientId"
+        }
+      ]
+    },
+    {
+      "@id": "ex:var/systolicBP",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "systolic_bp",
+      "cdif:uses": [
+        {
+          "@id": "ex:struct/vitalsWide/rv/systolicBP"
+        }
+      ]
+    }
+  ],
+  "schema:distribution": [
+    {
+      "@type": [
+        "schema:DataDownload",
+        "cdi:PhysicalDataSet"
+      ],
+      "schema:name": "vitals.csv",
+      "schema:contentUrl": "https://example.org/downloads/vitals.csv",
+      "schema:encodingFormat": [
+        "text/csv"
+      ],
+      "cdi:isStructuredBy": {
+        "@id": "ex:struct/vitalsWide"
+      }
+    }
+  ],
+  "schema:subjectOf": {
+    "@id": "ex:dataset/vitalsWide/metadata",
+    "@type": [
+      "schema:Dataset"
+    ],
+    "schema:additionalType": [
+      "dcat:CatalogRecord"
+    ],
+    "schema:about": {
+      "@id": "ex:dataset/vitalsWide"
+    },
+    "dcterms:conformsTo": [
+      {
+        "@id": "https://w3id.org/cdif/core/1.0"
+      },
+      {
+        "@id": "https://w3id.org/cdif/data_description/1.0"
+      },
+      {
+        "@id": "https://w3id.org/cdif/data_structure/1.0"
+      },
+      {
+        "@id": "https://w3id.org/cdif/discovery/1.0"
+      }
+    ]
+  }
+}

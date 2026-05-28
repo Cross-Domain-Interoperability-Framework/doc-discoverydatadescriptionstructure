@@ -1,0 +1,767 @@
+{
+  "@context": {
+    "schema": "http://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "cdif": "https://cdif.org/0.1/",
+    "csvw": "http://www.w3.org/ns/csvw#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "ex": "https://example.org/"
+  },
+  "@id": "ex:dataset/vitalsLong",
+  "@type": [
+    "schema:Dataset"
+  ],
+  "schema:name": "Patient vital signs (long-format observations)",
+  "schema:description": "Time-series of vital sign measurements (heart rate, systolic BP, diastolic BP, temperature) in long format: one row per observation with a descriptor column naming the measure and a reference column holding the value.",
+  "schema:identifier": "https://doi.org/10.1234/vitals-long-2025",
+  "schema:dateModified": "2025-09-15",
+  "schema:license": [
+    "https://creativecommons.org/licenses/by/4.0/"
+  ],
+  "schema:additionalType": [
+    "https://www.wikidata.org/wiki/Q47652734"
+  ],
+  "schema:sameAs": [
+    {
+      "@type": [
+        "schema:PropertyValue"
+      ],
+      "schema:propertyID": "urn:noaa-ghcnd:station-id",
+      "schema:value": "DEMO-LONG-2025",
+      "schema:url": "https://example.org/aliases/DEMO-LONG-2025"
+    }
+  ],
+  "schema:version": "1.0",
+  "schema:url": "https://example.org/datasets/vitals-long-2025",
+  "schema:inLanguage": "en",
+  "schema:datePublished": "2025-10-01",
+  "schema:conditionsOfAccess": [
+    "Open access; no registration required."
+  ],
+  "schema:keywords": [
+    {
+      "@type": [
+        "schema:DefinedTerm"
+      ],
+      "schema:name": "Vital signs",
+      "schema:termCode": "VS",
+      "schema:identifier": {
+        "@type": [
+          "schema:PropertyValue"
+        ],
+        "schema:propertyID": "https://loinc.org/",
+        "schema:value": "VS",
+        "schema:url": "https://loinc.org/8716-3/"
+      },
+      "schema:inDefinedTermSet": "https://loinc.org/"
+    },
+    "patient monitoring",
+    "long format"
+  ],
+  "schema:relatedLink": [
+    {
+      "@type": [
+        "schema:LinkRole"
+      ],
+      "schema:linkRelationship": "describedby",
+      "schema:target": {
+        "@type": [
+          "schema:EntryPoint"
+        ],
+        "schema:name": "Long-format encoding rationale",
+        "schema:url": "https://example.org/docs/long-vs-wide.html",
+        "schema:encodingFormat": "text/html"
+      }
+    }
+  ],
+  "schema:publishingPrinciples": [
+    {
+      "@type": [
+        "schema:CreativeWork",
+        "dcat:Relationship"
+      ],
+      "schema:name": "FAIR data policy",
+      "schema:url": "https://example.org/policy/fair-policy.html",
+      "schema:description": "Institutional FAIR data policy."
+    }
+  ],
+  "schema:creator": {
+    "@list": [
+      {
+        "@id": "https://orcid.org/0000-0002-7933-2154",
+        "@type": [
+          "schema:Person"
+        ],
+        "schema:name": "Richard, Stephen M.",
+        "schema:identifier": {
+          "@type": [
+            "schema:PropertyValue"
+          ],
+          "schema:propertyID": "https://orcid.org",
+          "schema:value": "0000-0002-7933-2154",
+          "schema:url": "https://orcid.org/0000-0002-7933-2154"
+        },
+        "schema:contactPoint": {
+          "@type": [
+            "schema:ContactPoint"
+          ],
+          "schema:email": "smr@example.org"
+        }
+      }
+    ]
+  },
+  "schema:contributor": [
+    {
+      "@type": [
+        "schema:Role"
+      ],
+      "schema:roleName": {
+        "@type": [
+          "schema:DefinedTerm"
+        ],
+        "schema:name": "Curator",
+        "schema:termCode": "data-curation",
+        "schema:identifier": {
+          "@type": [
+            "schema:PropertyValue"
+          ],
+          "schema:propertyID": "https://credit.niso.org/",
+          "schema:value": "data-curation",
+          "schema:url": "https://credit.niso.org/contributor-roles/data-curation/"
+        },
+        "schema:inDefinedTermSet": "https://credit.niso.org/"
+      },
+      "schema:contributor": {
+        "@id": "https://orcid.org/0000-0001-8898-3457",
+        "@type": [
+          "schema:Person"
+        ],
+        "schema:name": "Mojarro, Angel",
+        "schema:identifier": {
+          "@type": [
+            "schema:PropertyValue"
+          ],
+          "schema:propertyID": "https://orcid.org",
+          "schema:value": "0000-0001-8898-3457",
+          "schema:url": "https://orcid.org/0000-0001-8898-3457"
+        }
+      }
+    }
+  ],
+  "schema:publisher": {
+    "@id": "https://ror.org/0171mag52",
+    "@type": [
+      "schema:Organization"
+    ],
+    "schema:name": "Demo Health Data Repository",
+    "schema:identifier": {
+      "@type": [
+        "schema:PropertyValue"
+      ],
+      "schema:propertyID": "https://ror.org",
+      "schema:value": "0171mag52",
+      "schema:url": "https://ror.org/0171mag52"
+    }
+  },
+  "schema:provider": [
+    {
+      "@id": "https://ror.org/0171mag52",
+      "@type": [
+        "schema:Organization"
+      ],
+      "schema:name": "Demo Health Data Repository",
+      "schema:identifier": {
+        "@type": [
+          "schema:PropertyValue"
+        ],
+        "schema:propertyID": "https://ror.org",
+        "schema:value": "0171mag52",
+        "schema:url": "https://ror.org/0171mag52"
+      }
+    }
+  ],
+  "schema:funding": [
+    {
+      "@type": [
+        "schema:MonetaryGrant"
+      ],
+      "@id": "ex:grant/nih-R01-XXXX",
+      "schema:identifier": {
+        "@type": [
+          "schema:PropertyValue"
+        ],
+        "schema:propertyID": "https://reporter.nih.gov",
+        "schema:value": "R01-XXXX",
+        "schema:url": "https://reporter.nih.gov/search/?term=R01-XXXX"
+      },
+      "schema:name": "NIH Award R01-XXXX",
+      "schema:funder": {
+        "@id": "https://ror.org/01cwqze88",
+        "@type": [
+          "schema:Organization"
+        ],
+        "schema:name": "National Institutes of Health",
+        "schema:identifier": {
+          "@type": [
+            "schema:PropertyValue"
+          ],
+          "schema:propertyID": "https://ror.org",
+          "schema:value": "01cwqze88",
+          "schema:url": "https://ror.org/01cwqze88"
+        }
+      }
+    }
+  ],
+  "schema:variableMeasured": [
+    {
+      "@id": "ex:var/patientId",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "patient_id",
+      "cdif:physicalDataType": [
+        "xsd:string"
+      ],
+      "cdif:uses": [
+        {
+          "@id": "ex:struct/vitalsLong/rv/patientId"
+        }
+      ]
+    },
+    {
+      "@id": "ex:var/measureName",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "measure_name",
+      "cdif:physicalDataType": [
+        "xsd:string"
+      ],
+      "cdif:uses": [
+        {
+          "@id": "ex:struct/vitalsLong/dv/measureName"
+        }
+      ]
+    },
+    {
+      "@id": "ex:var/measureValue",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "measure_value",
+      "cdif:physicalDataType": [
+        "xsd:decimal"
+      ],
+      "cdif:uses": [
+        {
+          "@id": "ex:struct/vitalsLong/rv/measureValue"
+        }
+      ]
+    },
+    {
+      "@id": "ex:var/observedAt",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "observed_at",
+      "cdif:physicalDataType": [
+        "xsd:dateTime"
+      ],
+      "cdif:uses": [
+        {
+          "@id": "ex:struct/vitalsLong/rv/observedAt"
+        }
+      ]
+    }
+  ],
+  "cdif:hasPrimaryKey": {
+    "@type": [
+      "cdif:Key"
+    ],
+    "@id": "ex:dataset/vitalsLong/pk",
+    "cdif:isComposedOf": [
+      {
+        "@id": "ex:var/patientId"
+      },
+      {
+        "@id": "ex:var/measureName"
+      },
+      {
+        "@id": "ex:var/observedAt"
+      }
+    ]
+  },
+  "schema:distribution": [
+    {
+      "@type": [
+        "schema:DataDownload",
+        "cdi:TabularTextDataSet",
+        "cdi:PhysicalDataSet"
+      ],
+      "schema:name": "vitals-long.csv",
+      "schema:contentUrl": "https://example.org/downloads/vitals-long.csv",
+      "schema:encodingFormat": [
+        "text/csv"
+      ],
+      "cdi:characterSet": "UTF-8",
+      "cdif:fileSize": 2.4,
+      "cdif:fileSizeUofM": "MB",
+      "cdi:isDelimited": true,
+      "csvw:delimiter": ",",
+      "csvw:header": true,
+      "csvw:headerRowCount": 1,
+      "cdif:hasPhysicalMapping": [
+        {
+          "cdif:index": 0,
+          "cdif:format": "string",
+          "cdif:physicalDataType": "string",
+          "cdif:formats_InstanceVariable": {
+            "@id": "ex:var/patientId"
+          }
+        },
+        {
+          "cdif:index": 1,
+          "cdif:format": "string",
+          "cdif:physicalDataType": "string",
+          "cdif:formats_InstanceVariable": {
+            "@id": "ex:var/measureName"
+          }
+        },
+        {
+          "cdif:index": 2,
+          "cdif:format": "decimal",
+          "cdif:physicalDataType": "decimal",
+          "cdif:formats_InstanceVariable": {
+            "@id": "ex:var/measureValue"
+          }
+        },
+        {
+          "cdif:index": 3,
+          "cdif:format": "ISO8601",
+          "cdif:physicalDataType": "dateTime",
+          "cdif:formats_InstanceVariable": {
+            "@id": "ex:var/observedAt"
+          }
+        }
+      ],
+      "cdi:isStructuredBy": {
+        "@type": [
+          "cdi:LongDataStructure"
+        ],
+        "@id": "ex:struct/vitalsLong",
+        "cdi:has_DataStructureComponent": [
+          {
+            "@type": [
+              "cdi:IdentifierComponent"
+            ],
+            "@id": "ex:struct/vitalsLong/comp/patientId",
+            "cdif:isDefinedBy_RepresentedVariable": {
+              "@type": [
+                "cdi:RepresentedVariable"
+              ],
+              "@id": "ex:struct/vitalsLong/rv/patientId",
+              "cdif:name": [
+                "patient_id"
+              ],
+              "cdif:definition": "Pseudonymous patient identifier.",
+              "cdi:hasIntendedDataType": {
+                "@type": [
+                  "cdi:ControlledVocabularyEntry"
+                ],
+                "cdi:entryValue": [
+                  "xsd:string"
+                ]
+              }
+            }
+          },
+          {
+            "@type": [
+              "cdi:VariableDescriptorComponent"
+            ],
+            "@id": "ex:struct/vitalsLong/comp/measureName",
+            "cdif:isDefinedBy_DescriptorVariable": {
+              "@type": [
+                "cdi:DescriptorVariable"
+              ],
+              "@id": "ex:struct/vitalsLong/dv/measureName",
+              "cdif:name": [
+                "measure_name"
+              ],
+              "cdif:hasValuesFrom": {
+                "@type": [
+                  "cdi:DescriptorValueDomain"
+                ],
+                "@id": "ex:struct/vitalsLong/vd/measureName",
+                "cdif:takesValuesFrom": [
+                  {
+                    "cdif:value": "systolic_bp",
+                    "cdif:isDefinedBy": {
+                      "@type": [
+                        "cdi:RepresentedVariable"
+                      ],
+                      "@id": "ex:struct/vitalsLong/rv/systolicBP",
+                      "cdif:name": [
+                        "systolic_blood_pressure"
+                      ],
+                      "cdi:simpleUnitOfMeasure": "mmHg",
+                      "cdi:hasIntendedDataType": {
+                        "@type": [
+                          "cdi:ControlledVocabularyEntry"
+                        ],
+                        "cdi:entryValue": [
+                          "xsd:decimal"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "cdif:value": "diastolic_bp",
+                    "cdif:isDefinedBy": {
+                      "@type": [
+                        "cdi:RepresentedVariable"
+                      ],
+                      "@id": "ex:struct/vitalsLong/rv/diastolicBP",
+                      "cdif:name": [
+                        "diastolic_blood_pressure"
+                      ],
+                      "cdi:simpleUnitOfMeasure": "mmHg",
+                      "cdi:hasIntendedDataType": {
+                        "@type": [
+                          "cdi:ControlledVocabularyEntry"
+                        ],
+                        "cdi:entryValue": [
+                          "xsd:decimal"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "cdif:value": "heart_rate",
+                    "cdif:isDefinedBy": {
+                      "@type": [
+                        "cdi:RepresentedVariable"
+                      ],
+                      "@id": "ex:struct/vitalsLong/rv/heartRate",
+                      "cdif:name": [
+                        "heart_rate"
+                      ],
+                      "cdi:simpleUnitOfMeasure": "bpm",
+                      "cdi:hasIntendedDataType": {
+                        "@type": [
+                          "cdi:ControlledVocabularyEntry"
+                        ],
+                        "cdi:entryValue": [
+                          "xsd:decimal"
+                        ]
+                      }
+                    }
+                  },
+                  {
+                    "cdif:value": "temp_c",
+                    "cdif:isDefinedBy": {
+                      "@type": [
+                        "cdi:RepresentedVariable"
+                      ],
+                      "@id": "ex:struct/vitalsLong/rv/temperatureC",
+                      "cdif:name": [
+                        "body_temperature_celsius"
+                      ],
+                      "cdi:simpleUnitOfMeasure": "Cel",
+                      "cdi:hasIntendedDataType": {
+                        "@type": [
+                          "cdi:ControlledVocabularyEntry"
+                        ],
+                        "cdi:entryValue": [
+                          "xsd:decimal"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "cdi:refersTo": {
+              "@id": "ex:struct/vitalsLong/comp/measureValue"
+            }
+          },
+          {
+            "@type": [
+              "cdi:VariableValueComponent"
+            ],
+            "@id": "ex:struct/vitalsLong/comp/measureValue",
+            "cdif:isDefinedBy_RepresentedVariable": {
+              "@type": [
+                "cdi:RepresentedVariable"
+              ],
+              "@id": "ex:struct/vitalsLong/rv/measureValue",
+              "cdif:name": [
+                "measure_value"
+              ],
+              "cdif:definition": "Numeric value of the vital sign named by measure_name.",
+              "cdi:hasIntendedDataType": {
+                "@type": [
+                  "cdi:ControlledVocabularyEntry"
+                ],
+                "cdi:entryValue": [
+                  "xsd:decimal"
+                ]
+              }
+            }
+          },
+          {
+            "@type": [
+              "cdi:AttributeComponent"
+            ],
+            "@id": "ex:struct/vitalsLong/comp/observedAt",
+            "cdi:qualifies": [
+              {
+                "@id": "ex:struct/vitalsLong/comp/measureValue"
+              }
+            ],
+            "cdif:isDefinedBy_RepresentedVariable": {
+              "@type": [
+                "cdi:RepresentedVariable"
+              ],
+              "@id": "ex:struct/vitalsLong/rv/observedAt",
+              "cdif:name": [
+                "observed_at"
+              ],
+              "cdif:definition": "Timestamp of the observation; qualifies measure_value.",
+              "cdi:hasIntendedDataType": {
+                "@type": [
+                  "cdi:ControlledVocabularyEntry"
+                ],
+                "cdi:entryValue": [
+                  "xsd:dateTime"
+                ]
+              }
+            }
+          }
+        ],
+        "cdi:has_PrimaryKey": {
+          "@type": [
+            "cdif:PrimaryKey"
+          ],
+          "@id": "ex:struct/vitalsLong/pk",
+          "cdif:isComposedOf": [
+            {
+              "@id": "ex:var/patientId"
+            },
+            {
+              "@id": "ex:var/measureName"
+            },
+            {
+              "@id": "ex:var/observedAt"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "@type": [
+        "schema:WebAPI"
+      ],
+      "schema:name": "Vitals query API",
+      "schema:serviceType": {
+        "@type": [
+          "schema:DefinedTerm"
+        ],
+        "schema:name": "OGC API - Features",
+        "schema:identifier": "https://www.ogc.org/standard/ogcapi-features/",
+        "schema:termCode": "ogcapi-features"
+      },
+      "schema:termsOfService": "Open access, no authentication required.",
+      "schema:documentation": {
+        "@type": [
+          "schema:CreativeWork",
+          "dcat:Relationship"
+        ],
+        "schema:name": "OpenAPI specification for vitals service",
+        "schema:url": "https://example.org/api/v1/openapi.json"
+      },
+      "schema:potentialAction": [
+        {
+          "@type": [
+            "schema:Action"
+          ],
+          "schema:name": "Query vitals as long-format CSV",
+          "schema:target": {
+            "@type": [
+              "schema:EntryPoint"
+            ],
+            "schema:description": "OGC API Features endpoint returning vitals observations as long-format CSV.",
+            "schema:urlTemplate": "https://example.org/api/v1/collections/vitals/items?f={format}&limit={limit}&offset={offset}",
+            "schema:httpMethod": [
+              "GET"
+            ],
+            "schema:contentType": [
+              "text/csv"
+            ]
+          },
+          "schema:result": {
+            "@type": [
+              "schema:DataDownload",
+              "cdi:TabularTextDataSet",
+              "cdi:PhysicalDataSet"
+            ],
+            "schema:name": "Vitals API response (long format)",
+            "schema:contentUrl": "https://example.org/api/v1/collections/vitals/items?f=csv",
+            "schema:encodingFormat": [
+              "text/csv"
+            ],
+            "cdi:characterSet": "UTF-8",
+            "cdif:fileSize": 0.5,
+            "cdif:fileSizeUofM": "MB",
+            "cdi:isDelimited": true,
+            "csvw:delimiter": ",",
+            "csvw:header": true,
+            "csvw:headerRowCount": 1,
+            "cdif:hasPhysicalMapping": [
+              {
+                "cdif:index": 0,
+                "cdif:format": "string",
+                "cdif:physicalDataType": "string",
+                "cdif:formats_InstanceVariable": {
+                  "@id": "ex:var/patientId"
+                }
+              },
+              {
+                "cdif:index": 1,
+                "cdif:format": "string",
+                "cdif:physicalDataType": "string",
+                "cdif:formats_InstanceVariable": {
+                  "@id": "ex:var/measureName"
+                }
+              },
+              {
+                "cdif:index": 2,
+                "cdif:format": "decimal",
+                "cdif:physicalDataType": "decimal",
+                "cdif:formats_InstanceVariable": {
+                  "@id": "ex:var/measureValue"
+                }
+              },
+              {
+                "cdif:index": 3,
+                "cdif:format": "ISO8601",
+                "cdif:physicalDataType": "dateTime",
+                "cdif:formats_InstanceVariable": {
+                  "@id": "ex:var/observedAt"
+                }
+              }
+            ],
+            "cdi:isStructuredBy": {
+              "@id": "ex:struct/vitalsLong"
+            }
+          },
+          "schema:query-input": [
+            {
+              "@type": [
+                "schema:PropertyValueSpecification"
+              ],
+              "schema:valueName": "format",
+              "schema:description": "Response format token (csv only for this example).",
+              "schema:valueRequired": false,
+              "schema:valuePattern": "csv"
+            },
+            {
+              "@type": [
+                "schema:PropertyValueSpecification"
+              ],
+              "schema:valueName": "limit",
+              "schema:description": "Maximum number of observations to return (default 100).",
+              "schema:valueRequired": false
+            },
+            {
+              "@type": [
+                "schema:PropertyValueSpecification"
+              ],
+              "schema:valueName": "offset",
+              "schema:description": "Starting index for pagination.",
+              "schema:valueRequired": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "prov:wasGeneratedBy": [
+    {
+      "@type": [
+        "prov:Activity"
+      ],
+      "@id": "ex:act/vitals-aggregation",
+      "prov:used": [
+        {
+          "@id": "ex:tool/vitals-aggregator"
+        }
+      ]
+    }
+  ],
+  "prov:wasDerivedFrom": [
+    {
+      "@type": [
+        "schema:CreativeWork",
+        "dcat:Relationship"
+      ],
+      "schema:name": "EHR clinical encounters export, 2024-2025",
+      "schema:url": "https://example.org/sources/clinical-encounters-2024-2025",
+      "schema:description": "Source EHR system from which the long-format observations were derived."
+    }
+  ],
+  "cdif:statistics": [
+    {
+      "@type": [
+        "cdi:Statistics"
+      ],
+      "cdi:typeOfStatistic": {
+        "@type": [
+          "schema:DefinedTerm"
+        ],
+        "schema:name": "Count",
+        "schema:termCode": "count",
+        "schema:inDefinedTermSet": "https://ddialliance.org/vocab/statistic-types"
+      },
+      "cdi:statistic": [
+        {
+          "cdi:computationBase": "Total",
+          "cdi:content": 12450,
+          "cdi:typeOfNumericValue": "decimal"
+        }
+      ]
+    }
+  ],
+  "schema:subjectOf": {
+    "@id": "ex:dataset/vitalsLong/metadata",
+    "@type": [
+      "schema:Dataset"
+    ],
+    "schema:additionalType": [
+      "dcat:CatalogRecord"
+    ],
+    "schema:about": {
+      "@id": "ex:dataset/vitalsLong"
+    },
+    "dcterms:conformsTo": [
+      {
+        "@id": "https://w3id.org/cdif/core/1.0"
+      },
+      {
+        "@id": "https://w3id.org/cdif/data_description/1.0"
+      },
+      {
+        "@id": "https://w3id.org/cdif/data_structure/1.0"
+      },
+      {
+        "@id": "https://w3id.org/cdif/discovery/1.0"
+      }
+    ]
+  }
+}
