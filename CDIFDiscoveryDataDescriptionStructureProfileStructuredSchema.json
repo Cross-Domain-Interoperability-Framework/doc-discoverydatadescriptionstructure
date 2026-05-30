@@ -4003,26 +4003,23 @@
           }
         },
         "cdif:physicalDataType": {
-          "type": "array",
-          "items": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "object",
-                "properties": {
-                  "@id": {
-                    "type": "string",
-                    "description": "reference to a skos concept for the data type"
-                  }
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@id": {
+                  "type": "string",
+                  "description": "reference to a skos concept for the data type"
                 }
-              },
-              {
-                "$ref": "#/$defs/CdifInstanceVariable_DefinedTerm"
               }
-            ]
-          },
+            },
+            {
+              "$ref": "#/$defs/CdifInstanceVariable_DefinedTerm"
+            }
+          ],
           "description": "identifier or name for the data type concept."
         },
         "cdif:role": {
@@ -4349,7 +4346,31 @@
           "description": "A format for number expressed as a string, or date format like YYYY/MM or MM-DD-YY."
         },
         "cdif:physicalDataType": {
-          "type": "string"
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "@id": {
+                  "type": "string",
+                  "description": "reference to a skos concept for the data type"
+                }
+              }
+            },
+            {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/DefinedTerm"
+                },
+                {
+                  "$ref": "#/$defs/SkosConcept"
+                }
+              ]
+            }
+          ],
+          "description": "identifier or name for the data type concept."
         },
         "cdi:numberPattern": {
           "type": "string",

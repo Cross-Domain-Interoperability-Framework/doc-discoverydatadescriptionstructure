@@ -58,8 +58,8 @@ ARRAY_PROPERTIES = [
     'cdi:uses',
     'cdi:physicalDataType',
     # CDIF Data Description array-valued properties (cdi:->cdif: migration 2026-05)
-    # NOTE: cdif:physicalDataType is NOT here -- it is dual-context (array on
-    # cdi:InstanceVariable, string on a physical mapping); handled below.
+    # NOTE: cdif:physicalDataType is intentionally NOT array-valued -- it is a
+    # single value (string, @id object reference, or DefinedTerm) everywhere.
     'cdif:hasPhysicalMapping',
     'cdif:uses',
     'cdi:function',
@@ -211,13 +211,6 @@ def remove_nulls_and_normalize(obj, parent_key=None):
             pid = result.get('schema:propertyID')
             if pid is not None and not isinstance(pid, list):
                 result['schema:propertyID'] = [pid]
-
-        # cdif:physicalDataType: array on a cdi:InstanceVariable (variableMeasured item),
-        # but a plain string on a physical mapping. Only wrap in the InstanceVariable context.
-        if parent_key == 'schema:variableMeasured' or 'cdi:InstanceVariable' in type_list:
-            pdt = result.get('cdif:physicalDataType')
-            if pdt is not None and not isinstance(pdt, list):
-                result['cdif:physicalDataType'] = [pdt]
 
         # schema:measurementTechnique: array on Dataset (root), scalar inside variableMeasured
         if 'schema:Dataset' in type_list:
