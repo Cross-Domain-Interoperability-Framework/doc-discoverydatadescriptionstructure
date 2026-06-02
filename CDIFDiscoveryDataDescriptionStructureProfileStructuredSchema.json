@@ -1756,7 +1756,7 @@
                 "type": "object",
                 "properties": {
                   "@id": {
-                    "const": "https://w3id.org/cdif/core/1.0"
+                    "const": "https://w3id.org/cdif/core/1.1"
                   }
                 }
               }
@@ -1766,7 +1766,7 @@
                 "type": "object",
                 "properties": {
                   "@id": {
-                    "const": "https://w3id.org/cdif/discovery/1.0"
+                    "const": "https://w3id.org/cdif/discovery/1.1"
                   }
                 }
               }
@@ -1776,7 +1776,7 @@
                 "type": "object",
                 "properties": {
                   "@id": {
-                    "const": "https://w3id.org/cdif/data_description/1.0"
+                    "const": "https://w3id.org/cdif/data_description/1.1"
                   }
                 }
               }
@@ -1786,7 +1786,7 @@
                 "type": "object",
                 "properties": {
                   "@id": {
-                    "const": "https://w3id.org/cdif/data_structure/1.0"
+                    "const": "https://w3id.org/cdif/data_structure/1.1"
                   }
                 }
               }
@@ -2211,7 +2211,7 @@
                                                     "type": "object",
                                                     "properties": {
                                                       "@id": {
-                                                        "const": "https://w3id.org/cdif/codelist/1.0"
+                                                        "const": "https://w3id.org/cdif/codelist/1.1"
                                                       }
                                                     }
                                                   }
@@ -2519,7 +2519,7 @@
                                                   "type": "object",
                                                   "properties": {
                                                     "@id": {
-                                                      "const": "https://w3id.org/cdif/codelist/1.0"
+                                                      "const": "https://w3id.org/cdif/codelist/1.1"
                                                     }
                                                   }
                                                 }
@@ -4309,7 +4309,7 @@
                                           "type": "object",
                                           "properties": {
                                             "@id": {
-                                              "const": "https://w3id.org/cdif/codelist/1.0"
+                                              "const": "https://w3id.org/cdif/codelist/1.1"
                                             }
                                           }
                                         }
@@ -4610,7 +4610,7 @@
                                         "type": "object",
                                         "properties": {
                                           "@id": {
-                                            "const": "https://w3id.org/cdif/codelist/1.0"
+                                            "const": "https://w3id.org/cdif/codelist/1.1"
                                           }
                                         }
                                       }
