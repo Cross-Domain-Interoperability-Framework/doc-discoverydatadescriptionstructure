@@ -233,11 +233,12 @@ cdifd:CDIFCatalogRecordShape a sh:NodeShape ;
                         sh:prefix "ex" ] ) ;
             sh:select """
             PREFIX schema: <http://schema.org/>
+            PREFIX dcat: <http://www.w3.org/ns/dcat#>
             SELECT ?this
             WHERE {
             ?this a schema:Dataset ;
              schema:about ?parent ;
-             schema:additionalType "dcat:CatalogRecord" .
+             schema:additionalType dcat:CatalogRecord .
             }
         """ ] .
 
@@ -271,8 +272,10 @@ cdifd:CDIFCodelistConformsToShape a sh:NodeShape ;
             sh:prefixes cdifd: ;
             sh:select """
                 PREFIX schema: <http://schema.org/>
+                PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
                 SELECT ?this WHERE {
                     ?dataset schema:subjectOf ?this .
+                    ?dataset a skos:ConceptScheme .
                 }
             """ ] .
 
@@ -352,13 +355,14 @@ cdifd:CDIFDatasetMandatoryShape a sh:NodeShape ;
        PREFIX ex: <https://example.org/>
        PREFIX prov: <http://www.w3.org/ns/prov#>
        PREFIX dcterms: <http://purl.org/dc/terms/>
+       PREFIX dcat: <http://www.w3.org/ns/dcat#>
             SELECT ?this
             WHERE {
               ?this a schema:Dataset .
               # Exclude catalog-record nodes (they describe a record, not a dataset).
               MINUS {
                 ?this schema:about ?x .
-                ?this schema:additionalType "dcat:CatalogRecord" .
+                ?this schema:additionalType dcat:CatalogRecord .
               }
               # Exclude datasets that are only *referenced* as provenance / source /
               # derived-from / based-on resources rather than the resource being
@@ -771,6 +775,21 @@ cdifd:cdifDataStructure_WideDataStructureShape a sh:NodeShape ;
     sh:targetClass cdi:WideDataStructure .
 
 cdifd:cdifDataStructure_inlineStructureShape a sh:NodeShape .
+
+cdifd:cdifDescriptorValueDomainShape a sh:NodeShape ;
+    sh:property [ sh:message "A cdi:DescriptorValueDomain must carry at least one cdif:takesValuesFrom entry." ;
+            sh:minCount 1 ;
+            sh:path <https://w3id.org/cdif/takesValuesFrom> ;
+            sh:severity sh:Violation ] ;
+    sh:targetClass cdi:DescriptorValueDomain .
+
+cdifd:cdifDescriptorVariableShape a sh:NodeShape ;
+    sh:property [ sh:maxCount 1 ;
+            sh:message "A cdi:DescriptorVariable must reference exactly one cdi:DescriptorValueDomain via cdif:hasValuesFrom." ;
+            sh:minCount 1 ;
+            sh:path <https://w3id.org/cdif/hasValuesFrom> ;
+            sh:severity sh:Violation ] ;
+    sh:targetClass cdi:DescriptorVariable .
 
 cdifd:cdifDimensionComponentShape a sh:NodeShape ;
     sh:property [ sh:message "A cdi:DimensionComponent must carry cdif:isDefinedBy_RepresentedVariable (the RepresentedVariable it is a role of)." ;
@@ -1216,7 +1235,7 @@ cdifd:affiliationProperty a sh:PropertyShape ;
     sh:severity sh:Warning .
 
 cdifd:catalogRecordTypeProperty a sh:PropertyShape ;
-    sh:hasValue "dcat:CatalogRecord" ;
+    sh:hasValue dcat:CatalogRecord ;
     sh:message "The CatalogRecord node must have schema:additionalType including dcat:CatalogRecord" ;
     sh:minCount 1 ;
     sh:path schema:additionalType .

@@ -1259,6 +1259,9 @@
       "items": {
         "title": "very simple links or names of software or instruments used to generate a resource.",
         "type": "object",
+        "required": [
+          "@type"
+        ],
         "properties": {
           "@type": {
             "type": "array",
@@ -1272,6 +1275,7 @@
           },
           "prov:used": {
             "type": "array",
+            "description": "Entities the activity used. Per PROV-O each value denotes a prov:Entity. An item may be (1) a string URI or free-text reference, (2) an {@id} reference, or (3) an inline entity object. Inline entities SHOULD carry an @type that includes prov:Entity plus a schema.org type for the kind of thing used, e.g. [\"prov:Entity\",\"schema:Thing\"] (instrument), [\"prov:Entity\",\"schema:CreativeWork\"] (method/protocol), or [\"prov:Entity\",\"schema:SoftwareApplication\"] (software).",
             "items": {
               "anyOf": [
                 {
@@ -1285,6 +1289,25 @@
                       "description": "a resolvable reference to a representation of the software or instrument used"
                     }
                   }
+                },
+                {
+                  "type": "object",
+                  "description": "an inline prov:Entity used by the activity (see prov:used description)",
+                  "properties": {
+                    "@type": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "minItems": 1,
+                      "contains": {
+                        "const": "prov:Entity"
+                      }
+                    }
+                  },
+                  "required": [
+                    "@type"
+                  ]
                 }
               ]
             }
@@ -1334,10 +1357,33 @@
           "type": "array",
           "description": "additional type assertions for the catalog record node. dcat:CatalogRecord is required.",
           "items": {
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "required": [
+                  "@id"
+                ],
+                "properties": {
+                  "@id": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
           },
           "contains": {
-            "const": "dcat:CatalogRecord"
+            "type": "object",
+            "required": [
+              "@id"
+            ],
+            "properties": {
+              "@id": {
+                "const": "dcat:CatalogRecord"
+              }
+            }
           },
           "minItems": 1
         },
@@ -1613,7 +1659,22 @@
                                                       }
                                                     },
                                                     "schema:propertyID": {
-                                                      "type": "string"
+                                                      "anyOf": [
+                                                        {
+                                                          "type": "string"
+                                                        },
+                                                        {
+                                                          "type": "object",
+                                                          "required": [
+                                                            "@id"
+                                                          ],
+                                                          "properties": {
+                                                            "@id": {
+                                                              "type": "string"
+                                                            }
+                                                          }
+                                                        }
+                                                      ]
                                                     },
                                                     "schema:value": {
                                                       "type": "string"
@@ -1662,7 +1723,7 @@
                                               }
                                             },
                                             "skos:prefLabel": {
-                                              "description": "Preferred lexical label for the concept scheme. A single string, a single language-tagged value, or an array of language-tagged values. Each language should appear at most once.",
+                                              "description": "Preferred lexical label for the concept scheme. Required. A single\nstring, a single language-tagged value, or an array of language-tagged\nvalues.\n\n**Uniqueness rule.** Each language should appear at most once in the\nset of prefLabel values. Two prefLabel values with duplicate `@language`\ntags are non-conformant. Consumers may reject or arbitrarily pick one.\n\n**Multilinguality.** For codelists intended for multilingual use,\nsupply an array of language-tagged values — one per supported locale.\nWhen a bare string is supplied (no `@language` tag), consumers treat\nit as untagged and MAY infer the language from the enclosing document's\n`@context` or from `schema:inLanguage` on the codelist itself.\n\n**Relationship to skos:altLabel.** Alternate labels (acronyms,\nspelling variants, obsolete names) go on `skos:altLabel`, NOT on\n`prefLabel`. A concept scheme has exactly one preferred label per\nlanguage.\n",
                                               "type": "string"
                                             },
                                             "skos:definition": {
@@ -1698,10 +1759,33 @@
                                                 "schema:additionalType": {
                                                   "type": "array",
                                                   "items": {
-                                                    "type": "string"
+                                                    "anyOf": [
+                                                      {
+                                                        "type": "string"
+                                                      },
+                                                      {
+                                                        "type": "object",
+                                                        "required": [
+                                                          "@id"
+                                                        ],
+                                                        "properties": {
+                                                          "@id": {
+                                                            "type": "string"
+                                                          }
+                                                        }
+                                                      }
+                                                    ]
                                                   },
                                                   "contains": {
-                                                    "const": "dcat:CatalogRecord"
+                                                    "type": "object",
+                                                    "required": [
+                                                      "@id"
+                                                    ],
+                                                    "properties": {
+                                                      "@id": {
+                                                        "const": "dcat:CatalogRecord"
+                                                      }
+                                                    }
                                                   },
                                                   "minItems": 1
                                                 },
@@ -1974,7 +2058,22 @@
                                                     }
                                                   },
                                                   "schema:propertyID": {
-                                                    "type": "string"
+                                                    "anyOf": [
+                                                      {
+                                                        "type": "string"
+                                                      },
+                                                      {
+                                                        "type": "object",
+                                                        "required": [
+                                                          "@id"
+                                                        ],
+                                                        "properties": {
+                                                          "@id": {
+                                                            "type": "string"
+                                                          }
+                                                        }
+                                                      }
+                                                    ]
                                                   },
                                                   "schema:value": {
                                                     "type": "string"
@@ -2023,7 +2122,7 @@
                                             }
                                           },
                                           "skos:prefLabel": {
-                                            "description": "Preferred lexical label for the concept scheme. A single string, a single language-tagged value, or an array of language-tagged values. Each language should appear at most once.",
+                                            "description": "Preferred lexical label for the concept scheme. Required. A single\nstring, a single language-tagged value, or an array of language-tagged\nvalues.\n\n**Uniqueness rule.** Each language should appear at most once in the\nset of prefLabel values. Two prefLabel values with duplicate `@language`\ntags are non-conformant. Consumers may reject or arbitrarily pick one.\n\n**Multilinguality.** For codelists intended for multilingual use,\nsupply an array of language-tagged values — one per supported locale.\nWhen a bare string is supplied (no `@language` tag), consumers treat\nit as untagged and MAY infer the language from the enclosing document's\n`@context` or from `schema:inLanguage` on the codelist itself.\n\n**Relationship to skos:altLabel.** Alternate labels (acronyms,\nspelling variants, obsolete names) go on `skos:altLabel`, NOT on\n`prefLabel`. A concept scheme has exactly one preferred label per\nlanguage.\n",
                                             "type": "string"
                                           },
                                           "skos:definition": {
@@ -2059,10 +2158,33 @@
                                               "schema:additionalType": {
                                                 "type": "array",
                                                 "items": {
-                                                  "type": "string"
+                                                  "anyOf": [
+                                                    {
+                                                      "type": "string"
+                                                    },
+                                                    {
+                                                      "type": "object",
+                                                      "required": [
+                                                        "@id"
+                                                      ],
+                                                      "properties": {
+                                                        "@id": {
+                                                          "type": "string"
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
                                                 },
                                                 "contains": {
-                                                  "const": "dcat:CatalogRecord"
+                                                  "type": "object",
+                                                  "required": [
+                                                    "@id"
+                                                  ],
+                                                  "properties": {
+                                                    "@id": {
+                                                      "const": "dcat:CatalogRecord"
+                                                    }
+                                                  }
                                                 },
                                                 "minItems": 1
                                               },
@@ -2953,22 +3075,22 @@
                       "description": "Role given to a represented variable in the context of a long or wide data structure to identify the units associated to data points, and in dimensional and key value data structures to provide identifying fields for the instance values.",
                       "anyOf": [
                         {
-                          "$comment": "unresolved fragment ref: #/$defs/IdentifierComponent"
+                          "$ref": "#/$defs/IdentifierComponent"
                         },
                         {
-                          "$comment": "unresolved fragment ref: #/$defs/MeasureComponent"
+                          "$ref": "#/$defs/MeasureComponent"
                         },
                         {
-                          "$comment": "unresolved fragment ref: #/$defs/AttributeComponent"
+                          "$ref": "#/$defs/AttributeComponent"
                         },
                         {
-                          "$comment": "unresolved fragment ref: #/$defs/DimensionComponent"
+                          "$ref": "#/$defs/DimensionComponent"
                         },
                         {
-                          "$comment": "unresolved fragment ref: #/$defs/VariableValueComponent"
+                          "$ref": "#/$defs/VariableValueComponent"
                         },
                         {
-                          "$comment": "unresolved fragment ref: #/$defs/VariableDescriptorComponent"
+                          "$ref": "#/$defs/VariableDescriptorComponent"
                         }
                       ]
                     },
@@ -3011,16 +3133,16 @@
                 "items": {
                   "anyOf": [
                     {
-                      "$comment": "could not resolve fragment /$defs/IdentifierComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                      "$ref": "#/$defs/IdentifierComponent"
                     },
                     {
-                      "$comment": "could not resolve fragment /$defs/MeasureComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                      "$ref": "#/$defs/MeasureComponent"
                     },
                     {
-                      "$comment": "could not resolve fragment /$defs/AttributeComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                      "$ref": "#/$defs/AttributeComponent"
                     },
                     {
-                      "$comment": "could not resolve fragment /$defs/DimensionComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                      "$ref": "#/$defs/DimensionComponent"
                     }
                   ]
                 },
@@ -3073,37 +3195,37 @@
                 "items": {
                   "anyOf": [
                     {
-                      "$comment": "could not resolve fragment /$defs/IdentifierComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                      "$ref": "#/$defs/IdentifierComponent"
                     },
                     {
-                      "$comment": "could not resolve fragment /$defs/VariableDescriptorComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                      "$ref": "#/$defs/VariableDescriptorComponent"
                     },
                     {
-                      "$comment": "could not resolve fragment /$defs/VariableValueComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                      "$ref": "#/$defs/VariableValueComponent"
                     },
                     {
-                      "$comment": "could not resolve fragment /$defs/AttributeComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                      "$ref": "#/$defs/AttributeComponent"
                     }
                   ]
                 },
                 "allOf": [
                   {
                     "contains": {
-                      "$comment": "could not resolve fragment /$defs/IdentifierComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                      "$ref": "#/$defs/IdentifierComponent"
                     },
                     "minContains": 1,
                     "maxContains": 1
                   },
                   {
                     "contains": {
-                      "$comment": "could not resolve fragment /$defs/VariableDescriptorComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                      "$ref": "#/$defs/VariableDescriptorComponent"
                     },
                     "minContains": 1,
                     "maxContains": 1
                   },
                   {
                     "contains": {
-                      "$comment": "could not resolve fragment /$defs/VariableValueComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                      "$ref": "#/$defs/VariableValueComponent"
                     },
                     "minContains": 1,
                     "maxContains": 1
@@ -3143,13 +3265,13 @@
                 "items": {
                   "anyOf": [
                     {
-                      "$comment": "could not resolve fragment /$defs/IdentifierComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                      "$ref": "#/$defs/IdentifierComponent"
                     },
                     {
-                      "$comment": "could not resolve fragment /$defs/MeasureComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                      "$ref": "#/$defs/MeasureComponent"
                     },
                     {
-                      "$comment": "could not resolve fragment /$defs/AttributeComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                      "$ref": "#/$defs/AttributeComponent"
                     },
                     {
                       "$ref": "#/$defs/id-reference"
@@ -3257,22 +3379,22 @@
                                 "description": "Role given to a represented variable in the context of a long or wide data structure to identify the units associated to data points, and in dimensional and key value data structures to provide identifying fields for the instance values.",
                                 "anyOf": [
                                   {
-                                    "$comment": "unresolved fragment ref: #/$defs/IdentifierComponent"
+                                    "$ref": "#/$defs/IdentifierComponent"
                                   },
                                   {
-                                    "$comment": "unresolved fragment ref: #/$defs/MeasureComponent"
+                                    "$ref": "#/$defs/MeasureComponent"
                                   },
                                   {
-                                    "$comment": "unresolved fragment ref: #/$defs/AttributeComponent"
+                                    "$ref": "#/$defs/AttributeComponent"
                                   },
                                   {
-                                    "$comment": "unresolved fragment ref: #/$defs/DimensionComponent"
+                                    "$ref": "#/$defs/DimensionComponent"
                                   },
                                   {
-                                    "$comment": "unresolved fragment ref: #/$defs/VariableValueComponent"
+                                    "$ref": "#/$defs/VariableValueComponent"
                                   },
                                   {
-                                    "$comment": "unresolved fragment ref: #/$defs/VariableDescriptorComponent"
+                                    "$ref": "#/$defs/VariableDescriptorComponent"
                                   }
                                 ]
                               },
@@ -3315,16 +3437,16 @@
                           "items": {
                             "anyOf": [
                               {
-                                "$comment": "could not resolve fragment /$defs/IdentifierComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                                "$ref": "#/$defs/IdentifierComponent"
                               },
                               {
-                                "$comment": "could not resolve fragment /$defs/MeasureComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                                "$ref": "#/$defs/MeasureComponent"
                               },
                               {
-                                "$comment": "could not resolve fragment /$defs/AttributeComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                                "$ref": "#/$defs/AttributeComponent"
                               },
                               {
-                                "$comment": "could not resolve fragment /$defs/DimensionComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                                "$ref": "#/$defs/DimensionComponent"
                               }
                             ]
                           },
@@ -3377,37 +3499,37 @@
                           "items": {
                             "anyOf": [
                               {
-                                "$comment": "could not resolve fragment /$defs/IdentifierComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                                "$ref": "#/$defs/IdentifierComponent"
                               },
                               {
-                                "$comment": "could not resolve fragment /$defs/VariableDescriptorComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                                "$ref": "#/$defs/VariableDescriptorComponent"
                               },
                               {
-                                "$comment": "could not resolve fragment /$defs/VariableValueComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                                "$ref": "#/$defs/VariableValueComponent"
                               },
                               {
-                                "$comment": "could not resolve fragment /$defs/AttributeComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                                "$ref": "#/$defs/AttributeComponent"
                               }
                             ]
                           },
                           "allOf": [
                             {
                               "contains": {
-                                "$comment": "could not resolve fragment /$defs/IdentifierComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                                "$ref": "#/$defs/IdentifierComponent"
                               },
                               "minContains": 1,
                               "maxContains": 1
                             },
                             {
                               "contains": {
-                                "$comment": "could not resolve fragment /$defs/VariableDescriptorComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                                "$ref": "#/$defs/VariableDescriptorComponent"
                               },
                               "minContains": 1,
                               "maxContains": 1
                             },
                             {
                               "contains": {
-                                "$comment": "could not resolve fragment /$defs/VariableValueComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                                "$ref": "#/$defs/VariableValueComponent"
                               },
                               "minContains": 1,
                               "maxContains": 1
@@ -3447,13 +3569,13 @@
                           "items": {
                             "anyOf": [
                               {
-                                "$comment": "could not resolve fragment /$defs/IdentifierComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                                "$ref": "#/$defs/IdentifierComponent"
                               },
                               {
-                                "$comment": "could not resolve fragment /$defs/MeasureComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                                "$ref": "#/$defs/MeasureComponent"
                               },
                               {
-                                "$comment": "could not resolve fragment /$defs/AttributeComponent in C:\\GithubC\\CDIF\\metadataBuildingBlocks\\_sources\\cdifDataType\\cdifDataStructureComponent\\schema.yaml"
+                                "$ref": "#/$defs/AttributeComponent"
                               },
                               {
                                 "$ref": "#/$defs/id-reference"
@@ -3606,8 +3728,23 @@
           "minItems": 1
         },
         "schema:propertyID": {
-          "type": "string",
-          "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "required": [
+                "@id"
+              ],
+              "properties": {
+                "@id": {
+                  "type": "string"
+                }
+              }
+            }
+          ],
+          "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability. URI-shape values MUST be serialized as JSON-LD IRI references ({\"@id\":\"...\"}) so they participate in RDF entailment; free-label strings remain valid as strings."
         },
         "schema:value": {
           "type": "string",
@@ -3766,6 +3903,7 @@
             }
           },
           "required": [
+            "@type",
             "schema:email"
           ]
         },
@@ -4265,6 +4403,1020 @@
           }
         }
       }
+    },
+    "CdifRepresentedVariable": {
+      "title": "DDI-CDI Represented Variable",
+      "description": "Conceptual variable with a substantive value domain specified.",
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "const": "cdi:RepresentedVariable"
+          },
+          "minItems": 1
+        },
+        "@id": {
+          "type": "string",
+          "description": "Identifier for this RepresentedVariable node"
+        },
+        "cdi:describedUnitOfMeasure": {
+          "$ref": "#/$defs/cdifConceptOrTermOrString",
+          "description": "The unit in which the data values are measured (kg, pound, euro), expressed as a value from a controlled system of entries (i.e., QDT). Supports the provision of an identifier for the entry in the authoritative source (a URI, etc.), and the specific vocabulary."
+        },
+        "cdi:hasIntendedDataType": {
+          "$ref": "#/$defs/cdifConceptOrTermOrString",
+          "description": "The data type intended to be used by this variable. Supports the optional use of an external controlled vocabulary."
+        },
+        "cdi:takesSentinelValuesFrom": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "object",
+                "description": "Specification of possible sentinel values used by a variable. Sentinel values are special values used to indicate various invalid conditions for a variable, e.g. below detection, missing value.",
+                "properties": {
+                  "@type": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "contains": {
+                      "const": "cdif:SentinelValueDomain"
+                    },
+                    "minItems": 1
+                  },
+                  "@id": {
+                    "type": "string",
+                    "description": "Identifier for this SentinelValueDomain node"
+                  },
+                  "cdif:takesValuesFrom": {
+                    "anyOf": [
+                      {
+                        "title": "CDIF Enumeration Domain",
+                        "description": "A base class acting as an extension point to allow a codification vocabulary to be documented as enumerated value domain.",
+                        "type": "object",
+                        "properties": {
+                          "@type": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            },
+                            "contains": {
+                              "const": "cdif:EnumerationDomain"
+                            },
+                            "minItems": 1
+                          },
+                          "@id": {
+                            "type": "string",
+                            "description": "Identifier for this EnumerationDomain node"
+                          },
+                          "cdif:identifier": {
+                            "$ref": "#/$defs/Identifier",
+                            "description": "Identifier for this enumerated (categorical) domain."
+                          },
+                          "schema:name": {
+                            "type": "string",
+                            "description": "Human understandable name (liguistic signifier, word, phrase, or mnemonic)."
+                          },
+                          "cdif:references": {
+                            "description": "CDIF codelist (skos:ConceptScheme) whose concepts define the allowed values of this enumeration domain.",
+                            "anyOf": [
+                              {
+                                "type": "object",
+                                "title": "CDIF Codelist",
+                                "description": "A controlled-vocabulary codelist implemented as a skos:ConceptScheme constrained for CDIF use. The scheme must have a resolvable @id and identify its top concepts via skos:hasTopConcept; each concept (CdifCodelistConcept) must have a resolvable @id, skos:inScheme, skos:prefLabel, and skos:notation. Hierarchical concepts must declare both skos:narrower (for JSON tree traversal) and skos:broader (for upward navigation) where hierarchy exists. CDIF metadata properties (schema:identifier, schema:dateModified, schema:license or schema:conditionsOfAccess) take precedence over the equivalent dcterms properties from the base skos:ConceptScheme.",
+                                "properties": {
+                                  "@context": {
+                                    "description": "JSON-LD context (an object) declaring the skos namespace prefix and any additional prefixes used in concept URIs.",
+                                    "type": "object",
+                                    "properties": {
+                                      "skos": {
+                                        "const": "http://www.w3.org/2004/02/skos/core#"
+                                      }
+                                    },
+                                    "required": [
+                                      "skos"
+                                    ]
+                                  },
+                                  "@id": {
+                                    "type": "string",
+                                    "description": "URI identifier for this concept scheme."
+                                  },
+                                  "@type": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    },
+                                    "contains": {
+                                      "const": "skos:ConceptScheme"
+                                    },
+                                    "minItems": 1
+                                  },
+                                  "schema:identifier": {
+                                    "description": "Primary identifier for the codelist. May be a string URI or a structured PropertyValue.",
+                                    "anyOf": [
+                                      {
+                                        "type": "string"
+                                      },
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "@type": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "string"
+                                            },
+                                            "contains": {
+                                              "const": "schema:PropertyValue"
+                                            }
+                                          },
+                                          "schema:propertyID": {
+                                            "anyOf": [
+                                              {
+                                                "type": "string"
+                                              },
+                                              {
+                                                "type": "object",
+                                                "required": [
+                                                  "@id"
+                                                ],
+                                                "properties": {
+                                                  "@id": {
+                                                    "type": "string"
+                                                  }
+                                                }
+                                              }
+                                            ]
+                                          },
+                                          "schema:value": {
+                                            "type": "string"
+                                          },
+                                          "schema:url": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "schema:dateModified": {
+                                    "type": "string",
+                                    "description": "ISO 8601 date when the codelist was last modified."
+                                  },
+                                  "schema:url": {
+                                    "type": "string",
+                                    "format": "uri",
+                                    "description": "Web location of a page describing the codelist.",
+                                    "default": "missing"
+                                  },
+                                  "schema:license": {
+                                    "description": "License for the codelist.",
+                                    "type": "array",
+                                    "items": {
+                                      "anyOf": [
+                                        {
+                                          "type": "string"
+                                        },
+                                        {
+                                          "type": "object",
+                                          "properties": {
+                                            "@id": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "schema:conditionsOfAccess": {
+                                    "description": "Text statement of access conditions for the codelist.",
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "skos:prefLabel": {
+                                    "description": "Preferred lexical label for the concept scheme. Required. A single\nstring, a single language-tagged value, or an array of language-tagged\nvalues.\n\n**Uniqueness rule.** Each language should appear at most once in the\nset of prefLabel values. Two prefLabel values with duplicate `@language`\ntags are non-conformant. Consumers may reject or arbitrarily pick one.\n\n**Multilinguality.** For codelists intended for multilingual use,\nsupply an array of language-tagged values — one per supported locale.\nWhen a bare string is supplied (no `@language` tag), consumers treat\nit as untagged and MAY infer the language from the enclosing document's\n`@context` or from `schema:inLanguage` on the codelist itself.\n\n**Relationship to skos:altLabel.** Alternate labels (acronyms,\nspelling variants, obsolete names) go on `skos:altLabel`, NOT on\n`prefLabel`. A concept scheme has exactly one preferred label per\nlanguage.\n",
+                                    "type": "string"
+                                  },
+                                  "skos:definition": {
+                                    "description": "Formal explanation of the meaning or purpose of this concept scheme.",
+                                    "type": "string"
+                                  },
+                                  "skos:note": {
+                                    "description": "General note about the concept scheme.",
+                                    "type": "string"
+                                  },
+                                  "skos:hasTopConcept": {
+                                    "description": "Top-level concepts that have no skos:broader in this scheme. Required for hierarchical codelists.",
+                                    "type": "array",
+                                    "minItems": 1,
+                                    "items": {
+                                      "$ref": "#/$defs/CdifCodelistConcept"
+                                    }
+                                  },
+                                  "schema:subjectOf": {
+                                    "description": "Catalog record describing this codelist as CDIF-conformant metadata. Must declare conformance to the cdifCodelist profile via dcterms:conformsTo and be typed as schema:Dataset with schema:additionalType including dcat:CatalogRecord.",
+                                    "type": "object",
+                                    "properties": {
+                                      "@type": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string"
+                                        },
+                                        "contains": {
+                                          "const": "schema:Dataset"
+                                        },
+                                        "minItems": 1
+                                      },
+                                      "schema:additionalType": {
+                                        "type": "array",
+                                        "items": {
+                                          "anyOf": [
+                                            {
+                                              "type": "string"
+                                            },
+                                            {
+                                              "type": "object",
+                                              "required": [
+                                                "@id"
+                                              ],
+                                              "properties": {
+                                                "@id": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        },
+                                        "contains": {
+                                          "type": "object",
+                                          "required": [
+                                            "@id"
+                                          ],
+                                          "properties": {
+                                            "@id": {
+                                              "const": "dcat:CatalogRecord"
+                                            }
+                                          }
+                                        },
+                                        "minItems": 1
+                                      },
+                                      "dcterms:conformsTo": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "@id": {
+                                              "type": "string"
+                                            }
+                                          },
+                                          "required": [
+                                            "@id"
+                                          ]
+                                        },
+                                        "contains": {
+                                          "type": "object",
+                                          "properties": {
+                                            "@id": {
+                                              "const": "https://w3id.org/cdif/codelist/1.1"
+                                            }
+                                          }
+                                        },
+                                        "minItems": 1
+                                      },
+                                      "@id": {
+                                        "type": "string",
+                                        "description": "Identifier for the catalog record."
+                                      },
+                                      "schema:about": {
+                                        "type": "object",
+                                        "properties": {
+                                          "@id": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "@id"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "@type",
+                                      "schema:additionalType",
+                                      "dcterms:conformsTo"
+                                    ]
+                                  }
+                                },
+                                "anyOf": [
+                                  {
+                                    "required": [
+                                      "schema:license"
+                                    ]
+                                  },
+                                  {
+                                    "required": [
+                                      "schema:conditionsOfAccess"
+                                    ]
+                                  }
+                                ],
+                                "required": [
+                                  "@id",
+                                  "skos:prefLabel",
+                                  "schema:identifier",
+                                  "schema:dateModified",
+                                  "skos:hasTopConcept"
+                                ]
+                              },
+                              {
+                                "type": "object",
+                                "description": "object reference via URI or URI fragment referencing an @id in the same document",
+                                "properties": {
+                                  "@id": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "cdif:purpose": {
+                            "type": "string",
+                            "description": "Intent or reason for the object/the description of the object."
+                          }
+                        },
+                        "required": [
+                          "@type",
+                          "cdif:references"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "description": "JSON-LD @id reference to a node defined elsewhere in the graph",
+                        "properties": {
+                          "@id": {
+                            "type": "string",
+                            "description": "IRI or blank node identifier of the referenced node"
+                          }
+                        },
+                        "required": [
+                          "@id"
+                        ]
+                      }
+                    ]
+                  },
+                  "cdif:displayLabel": {
+                    "type": "string",
+                    "description": "A human-readable display label for the object. Supports the use of multiple languages. Repeat for labels with different content, for example, labels with differing length limitations."
+                  },
+                  "cdif:recommendedDataType": {
+                    "type": "array",
+                    "description": "The data types that are recommended for use with this domain.",
+                    "items": {
+                      "$ref": "#/$defs/xsdDataType"
+                    },
+                    "minItems": 1
+                  },
+                  "cdi:isDescribedBy": {
+                    "description": "A ValueAndConceptDescription giving the formal description (ranges, patterns, classification level, expressions) of the values this domain admits.",
+                    "anyOf": [
+                      {
+                        "$ref": "#/$defs/ValueAndConceptDescription"
+                      },
+                      {
+                        "type": "object",
+                        "description": "JSON-LD @id reference to a node defined elsewhere in the graph",
+                        "properties": {
+                          "@id": {
+                            "type": "string",
+                            "description": "IRI or blank node identifier of the referenced node"
+                          }
+                        },
+                        "required": [
+                          "@id"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "@type"
+                ],
+                "anyOf": [
+                  {
+                    "required": [
+                      "cdif:takesValuesFrom"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "cdif:recommendedDataType"
+                    ]
+                  }
+                ]
+              },
+              {
+                "$ref": "#/$defs/CdifRepresentedVariable_id-reference"
+              }
+            ]
+          },
+          "minItems": 1,
+          "description": "Sentinel (missing / not-applicable) value domain(s) for this RepresentedVariable (RepresentedVariable.takesSentinelValuesFrom)."
+        },
+        "cdi:takesSubstantiveValuesFrom": {
+          "anyOf": [
+            {
+              "type": "object",
+              "description": "Value domain for a substantive conceptual domain. Typically a description and/or enumeration of allowed values of interest.",
+              "properties": {
+                "@type": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "contains": {
+                    "const": "cdif:SubstantiveValueDomain"
+                  },
+                  "minItems": 1
+                },
+                "@id": {
+                  "type": "string",
+                  "description": "Identifier for this SubstantiveValueDomain node"
+                },
+                "cdif:takesValuesFrom": {
+                  "anyOf": [
+                    {
+                      "title": "CDIF Enumeration Domain",
+                      "description": "A base class acting as an extension point to allow a codification vocabulary to be documented as enumerated value domain.",
+                      "type": "object",
+                      "properties": {
+                        "@type": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "contains": {
+                            "const": "cdif:EnumerationDomain"
+                          },
+                          "minItems": 1
+                        },
+                        "@id": {
+                          "type": "string",
+                          "description": "Identifier for this EnumerationDomain node"
+                        },
+                        "cdif:identifier": {
+                          "$ref": "#/$defs/Identifier",
+                          "description": "Identifier for this enumerated (categorical) domain."
+                        },
+                        "schema:name": {
+                          "type": "string",
+                          "description": "Human understandable name (liguistic signifier, word, phrase, or mnemonic)."
+                        },
+                        "cdif:references": {
+                          "description": "CDIF codelist (skos:ConceptScheme) whose concepts define the allowed values of this enumeration domain.",
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "title": "CDIF Codelist",
+                              "description": "A controlled-vocabulary codelist implemented as a skos:ConceptScheme constrained for CDIF use. The scheme must have a resolvable @id and identify its top concepts via skos:hasTopConcept; each concept (CdifCodelistConcept) must have a resolvable @id, skos:inScheme, skos:prefLabel, and skos:notation. Hierarchical concepts must declare both skos:narrower (for JSON tree traversal) and skos:broader (for upward navigation) where hierarchy exists. CDIF metadata properties (schema:identifier, schema:dateModified, schema:license or schema:conditionsOfAccess) take precedence over the equivalent dcterms properties from the base skos:ConceptScheme.",
+                              "properties": {
+                                "@context": {
+                                  "description": "JSON-LD context (an object) declaring the skos namespace prefix and any additional prefixes used in concept URIs.",
+                                  "type": "object",
+                                  "properties": {
+                                    "skos": {
+                                      "const": "http://www.w3.org/2004/02/skos/core#"
+                                    }
+                                  },
+                                  "required": [
+                                    "skos"
+                                  ]
+                                },
+                                "@id": {
+                                  "type": "string",
+                                  "description": "URI identifier for this concept scheme."
+                                },
+                                "@type": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "contains": {
+                                    "const": "skos:ConceptScheme"
+                                  },
+                                  "minItems": 1
+                                },
+                                "schema:identifier": {
+                                  "description": "Primary identifier for the codelist. May be a string URI or a structured PropertyValue.",
+                                  "anyOf": [
+                                    {
+                                      "type": "string"
+                                    },
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "@type": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string"
+                                          },
+                                          "contains": {
+                                            "const": "schema:PropertyValue"
+                                          }
+                                        },
+                                        "schema:propertyID": {
+                                          "anyOf": [
+                                            {
+                                              "type": "string"
+                                            },
+                                            {
+                                              "type": "object",
+                                              "required": [
+                                                "@id"
+                                              ],
+                                              "properties": {
+                                                "@id": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        },
+                                        "schema:value": {
+                                          "type": "string"
+                                        },
+                                        "schema:url": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  ]
+                                },
+                                "schema:dateModified": {
+                                  "type": "string",
+                                  "description": "ISO 8601 date when the codelist was last modified."
+                                },
+                                "schema:url": {
+                                  "type": "string",
+                                  "format": "uri",
+                                  "description": "Web location of a page describing the codelist.",
+                                  "default": "missing"
+                                },
+                                "schema:license": {
+                                  "description": "License for the codelist.",
+                                  "type": "array",
+                                  "items": {
+                                    "anyOf": [
+                                      {
+                                        "type": "string"
+                                      },
+                                      {
+                                        "type": "object",
+                                        "properties": {
+                                          "@id": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                "schema:conditionsOfAccess": {
+                                  "description": "Text statement of access conditions for the codelist.",
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                },
+                                "skos:prefLabel": {
+                                  "description": "Preferred lexical label for the concept scheme. Required. A single\nstring, a single language-tagged value, or an array of language-tagged\nvalues.\n\n**Uniqueness rule.** Each language should appear at most once in the\nset of prefLabel values. Two prefLabel values with duplicate `@language`\ntags are non-conformant. Consumers may reject or arbitrarily pick one.\n\n**Multilinguality.** For codelists intended for multilingual use,\nsupply an array of language-tagged values — one per supported locale.\nWhen a bare string is supplied (no `@language` tag), consumers treat\nit as untagged and MAY infer the language from the enclosing document's\n`@context` or from `schema:inLanguage` on the codelist itself.\n\n**Relationship to skos:altLabel.** Alternate labels (acronyms,\nspelling variants, obsolete names) go on `skos:altLabel`, NOT on\n`prefLabel`. A concept scheme has exactly one preferred label per\nlanguage.\n",
+                                  "type": "string"
+                                },
+                                "skos:definition": {
+                                  "description": "Formal explanation of the meaning or purpose of this concept scheme.",
+                                  "type": "string"
+                                },
+                                "skos:note": {
+                                  "description": "General note about the concept scheme.",
+                                  "type": "string"
+                                },
+                                "skos:hasTopConcept": {
+                                  "description": "Top-level concepts that have no skos:broader in this scheme. Required for hierarchical codelists.",
+                                  "type": "array",
+                                  "minItems": 1,
+                                  "items": {
+                                    "$ref": "#/$defs/CdifCodelistConcept"
+                                  }
+                                },
+                                "schema:subjectOf": {
+                                  "description": "Catalog record describing this codelist as CDIF-conformant metadata. Must declare conformance to the cdifCodelist profile via dcterms:conformsTo and be typed as schema:Dataset with schema:additionalType including dcat:CatalogRecord.",
+                                  "type": "object",
+                                  "properties": {
+                                    "@type": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      },
+                                      "contains": {
+                                        "const": "schema:Dataset"
+                                      },
+                                      "minItems": 1
+                                    },
+                                    "schema:additionalType": {
+                                      "type": "array",
+                                      "items": {
+                                        "anyOf": [
+                                          {
+                                            "type": "string"
+                                          },
+                                          {
+                                            "type": "object",
+                                            "required": [
+                                              "@id"
+                                            ],
+                                            "properties": {
+                                              "@id": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          }
+                                        ]
+                                      },
+                                      "contains": {
+                                        "type": "object",
+                                        "required": [
+                                          "@id"
+                                        ],
+                                        "properties": {
+                                          "@id": {
+                                            "const": "dcat:CatalogRecord"
+                                          }
+                                        }
+                                      },
+                                      "minItems": 1
+                                    },
+                                    "dcterms:conformsTo": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "@id": {
+                                            "type": "string"
+                                          }
+                                        },
+                                        "required": [
+                                          "@id"
+                                        ]
+                                      },
+                                      "contains": {
+                                        "type": "object",
+                                        "properties": {
+                                          "@id": {
+                                            "const": "https://w3id.org/cdif/codelist/1.1"
+                                          }
+                                        }
+                                      },
+                                      "minItems": 1
+                                    },
+                                    "@id": {
+                                      "type": "string",
+                                      "description": "Identifier for the catalog record."
+                                    },
+                                    "schema:about": {
+                                      "type": "object",
+                                      "properties": {
+                                        "@id": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": [
+                                        "@id"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "@type",
+                                    "schema:additionalType",
+                                    "dcterms:conformsTo"
+                                  ]
+                                }
+                              },
+                              "anyOf": [
+                                {
+                                  "required": [
+                                    "schema:license"
+                                  ]
+                                },
+                                {
+                                  "required": [
+                                    "schema:conditionsOfAccess"
+                                  ]
+                                }
+                              ],
+                              "required": [
+                                "@id",
+                                "skos:prefLabel",
+                                "schema:identifier",
+                                "schema:dateModified",
+                                "skos:hasTopConcept"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "description": "object reference via URI or URI fragment referencing an @id in the same document",
+                              "properties": {
+                                "@id": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "cdif:purpose": {
+                          "type": "string",
+                          "description": "Intent or reason for the object/the description of the object."
+                        }
+                      },
+                      "required": [
+                        "@type",
+                        "cdif:references"
+                      ]
+                    },
+                    {
+                      "type": "object",
+                      "description": "JSON-LD @id reference to a node defined elsewhere in the graph",
+                      "properties": {
+                        "@id": {
+                          "type": "string",
+                          "description": "IRI or blank node identifier of the referenced node"
+                        }
+                      },
+                      "required": [
+                        "@id"
+                      ]
+                    }
+                  ]
+                },
+                "cdif:displayLabel": {
+                  "type": "string",
+                  "description": "A human-readable display label for the object. "
+                },
+                "cdif:recommendedDataType": {
+                  "type": "array",
+                  "description": "The data types that are recommended for use with this domain.",
+                  "items": {
+                    "$ref": "#/$defs/xsdDataType"
+                  },
+                  "minItems": 1
+                },
+                "cdi:isDescribedBy": {
+                  "description": "A ValueAndConceptDescription giving the formal description (ranges, patterns, classification level, expressions) of the values this domain admits.",
+                  "anyOf": [
+                    {
+                      "$ref": "#/$defs/ValueAndConceptDescription"
+                    },
+                    {
+                      "type": "object",
+                      "description": "JSON-LD @id reference to a node defined elsewhere in the graph",
+                      "properties": {
+                        "@id": {
+                          "type": "string",
+                          "description": "IRI or blank node identifier of the referenced node"
+                        }
+                      },
+                      "required": [
+                        "@id"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "@type"
+              ],
+              "anyOf": [
+                {
+                  "required": [
+                    "cdif:takesValuesFrom"
+                  ]
+                },
+                {
+                  "required": [
+                    "cdif:recommendedDataType"
+                  ]
+                }
+              ]
+            },
+            {
+              "$ref": "#/$defs/CdifRepresentedVariable_id-reference"
+            }
+          ],
+          "description": "The substantive value domain for this RepresentedVariable - the set of valid, meaningful values (RepresentedVariable.takesSubstantiveValuesFrom)."
+        },
+        "cdi:simpleUnitOfMeasure": {
+          "type": "string",
+          "description": "The unit in which the data values are measured (kg, pound, euro), expressed as a simple string, in cases where no additional information is available (in the legacy system) or needed (as in the case of broad agreement within the community of use [i.e., ISO country codes, currencies, etc. in SDMX])"
+        },
+        "cdif:descriptiveText": {
+          "type": "string",
+          "description": "A short natural language account of the characteristics of the object."
+        },
+        "cdi:measures": {
+          "anyOf": [
+            {
+              "type": "object",
+              "description": "Unit type is a type or class of objects of interest (units).",
+              "properties": {
+                "@type": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "contains": {
+                    "const": "cdi:UnitType"
+                  },
+                  "minItems": 1
+                },
+                "@id": {
+                  "type": "string",
+                  "description": "Identifier for this UnitType node"
+                },
+                "cdif:descriptiveText": {
+                  "type": "string",
+                  "description": "A short natural language account of the characteristics of the object."
+                },
+                "cdif:definition": {
+                  "type": "string",
+                  "description": "Natural language statement conveying the meaning of a concept, differentiating it from other concepts. Supports the use of multiple languages and structured text. 'externalDefinition' can't be used if 'definition' is used."
+                },
+                "cdif:displayLabel": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "description": "A human-readable display label for the object. Supports the use of multiple languages. Repeat for labels with different content, for example, labels with differing length limitations."
+                },
+                "cdi:externalDefinition": {
+                  "type": "object",
+                  "description": "A reference to an external definition of a concept (that is, a concept which is described outside the content of the DDI-CDI metadata description). An example is a SKOS concept. The definition property is assumed to duplicate the external one referenced if externalDefinition is used. Other corresponding properties are assumed to be included unchanged if used.",
+                  "properties": {
+                    "@type": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "contains": {
+                        "const": "cdif:Reference"
+                      },
+                      "minItems": 1
+                    },
+                    "schema:url": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "URL of the referenced resource."
+                    },
+                    "schema:name": {
+                      "type": "string",
+                      "description": "Human-readable name of the referenced resource."
+                    },
+                    "schema:description": {
+                      "type": "string",
+                      "description": "Human-readable description of the reference."
+                    }
+                  },
+                  "required": [
+                    "@type"
+                  ]
+                },
+                "cdi:identifier": {
+                  "$ref": "#/$defs/Identifier",
+                  "description": "Identifier for objects requiring short- or long-lasting referencing and management."
+                },
+                "cdif:name": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "description": "Human understandable name (linguistic signifier, word, phrase, or mnemonic). May follow ISO/IEC 11179-5 naming principles, and have context provided to specify usage."
+                },
+                "cdif:uses_Concept": {
+                  "type": "array",
+                  "items": {
+                    "anyOf": [
+                      {
+                        "title": "SKOS Concept",
+                        "description": "JSON Schema for a SKOS Concept in JSON-LD form. A unit of thought within a concept scheme. Supports labels (prefLabel, altLabel, hiddenLabel), notations, hierarchical relations (broader/narrower), associative relations (related), cross-scheme mapping properties, scheme membership, and documentary notes. Based on the W3C SKOS Reference (https://www.w3.org/TR/skos-reference/).",
+                        "allOf": [
+                          {
+                            "$ref": "#/$defs/Concept"
+                          }
+                        ]
+                      },
+                      {
+                        "$ref": "#/$defs/CdifRepresentedVariable_id-reference"
+                      }
+                    ]
+                  },
+                  "minItems": 1
+                }
+              },
+              "required": [
+                "@type"
+              ]
+            },
+            {
+              "$ref": "#/$defs/CdifRepresentedVariable_id-reference"
+            }
+          ]
+        },
+        "cdi:unitOfMeasureKind": {
+          "$ref": "#/$defs/cdifConceptOrTermOrString",
+          "description": "Kind of unit of measure, so that it may be prone to translation to equivalent UOMs. Example values include \"acceleration,\" \"temperature,\" \"salinity\", etc. This description exists at the conceptual level, indicating a limitation on the type of representations which may be used for the variable as it is made more concrete."
+        },
+        "cdif:definition": {
+          "type": "string",
+          "description": "Natural language statement conveying the meaning of a concept, differentiating it from other concepts. Supports the use of multiple languages and structured text. 'externalDefinition' can't be used if 'definition' is used."
+        },
+        "cdif:displayLabel": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "A human-readable display label for the object. Supports the use of multiple languages. Repeat for labels with different content, for example, labels with differing length limitations."
+        },
+        "cdi:externalDefinition": {
+          "type": "object",
+          "description": "A reference to an external definition of a concept (that is, a concept which is described outside the content of the DDI-CDI metadata description). An example is a SKOS concept. The definition property is assumed to duplicate the external one referenced if externalDefinition is used. Other corresponding properties are assumed to be included unchanged if used.",
+          "properties": {
+            "@type": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "contains": {
+                "const": "cdif:Reference"
+              },
+              "minItems": 1
+            },
+            "schema:url": {
+              "type": "string",
+              "format": "uri",
+              "description": "URL of the referenced resource."
+            },
+            "schema:name": {
+              "type": "string",
+              "description": "Human-readable name of the referenced resource."
+            },
+            "schema:description": {
+              "type": "string",
+              "description": "Human-readable description of the reference."
+            }
+          },
+          "required": [
+            "@type"
+          ]
+        },
+        "cdi:identifier": {
+          "$ref": "#/$defs/Identifier",
+          "description": "Identifier for objects requiring short- or long-lasting referencing and management."
+        },
+        "cdif:name": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "Human understandable name (linguistic signifier, word, phrase, or mnemonic). May follow ISO/IEC 11179-5 naming principles, and have context provided to specify usage."
+        },
+        "cdif:uses_Concept": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "title": "SKOS Concept",
+                "description": "JSON Schema for a SKOS Concept in JSON-LD form. A unit of thought within a concept scheme. Supports labels (prefLabel, altLabel, hiddenLabel), notations, hierarchical relations (broader/narrower), associative relations (related), cross-scheme mapping properties, scheme membership, and documentary notes. Based on the W3C SKOS Reference (https://www.w3.org/TR/skos-reference/).",
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/Concept"
+                  }
+                ]
+              },
+              {
+                "$ref": "#/$defs/CdifRepresentedVariable_id-reference"
+              }
+            ]
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "@type"
+      ]
     },
     "id-reference": {
       "type": "object",
@@ -5188,7 +6340,7 @@
           }
         },
         "skos:prefLabel": {
-          "description": "Preferred lexical label for this concept. A single string, a single language-tagged value, or an array of language-tagged values. Each language should appear at most once.",
+          "description": "Preferred lexical label for this concept. A single string,\na single language-tagged value, or an array of language-tagged values.\nEach language should appear at most once.\n\n**Uniqueness rule.** Each language should appear at most once in the\nset of prefLabel values. Two prefLabel values with duplicate `@language`\ntags are non-conformant. Consumers may reject or arbitrarily pick one.\n\n**Relationship to skos:altLabel.** Alternate labels (acronyms,\nspelling variants, obsolete names) go on `skos:altLabel`, NOT on\n`prefLabel`. A concept has exactly one preferred label per language.\n",
           "type": "string"
         },
         "skos:notation": {
@@ -5251,6 +6403,418 @@
         "skos:inScheme",
         "skos:prefLabel",
         "skos:notation"
+      ]
+    },
+    "IdentifierComponent": {
+      "type": "object",
+      "description": "Role given to a represented variable in the context of a long or wide data structure to identify the units associated to data points, and in dimensional and key value data structures to provide identifying fields for the instance values.",
+      "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "const": "cdi:IdentifierComponent"
+          },
+          "minItems": 1
+        },
+        "@id": {
+          "type": "string",
+          "description": "Identifier for this IdentifierComponent node"
+        },
+        "cdif:isDefinedBy_RepresentedVariable": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CdifRepresentedVariable"
+            },
+            {
+              "$ref": "#/$defs/CdifDataStructureComponent_id-reference"
+            }
+          ]
+        }
+      },
+      "required": [
+        "@type",
+        "cdif:isDefinedBy_RepresentedVariable"
+      ]
+    },
+    "MeasureComponent": {
+      "type": "object",
+      "description": "Role given to a represented variable in the context of a data structure to hold the observed/derived values.",
+      "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "const": "cdi:MeasureComponent"
+          },
+          "minItems": 1
+        },
+        "@id": {
+          "type": "string",
+          "description": "Identifier for this MeasureComponent node"
+        },
+        "cdif:name": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "description": "Human understandable name (liguistic signifier, word, phrase, or mnemonic). May follow ISO/IEC 11179-5 naming principles, and have context provided to specify usage."
+        },
+        "cdi:identifier": {
+          "$ref": "#/$defs/Identifier",
+          "description": "Identifier for objects requiring short- or long-lasting referencing and management."
+        },
+        "cdif:isDefinedBy_RepresentedVariable": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CdifRepresentedVariable"
+            },
+            {
+              "$ref": "#/$defs/CdifDataStructureComponent_id-reference"
+            }
+          ]
+        },
+        "cdi:semantic": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/cdifConceptOrTermOrString"
+          },
+          "minItems": 1,
+          "description": "Qualifies the purpose or use expressed as a paired external controlled vocabulary."
+        }
+      },
+      "required": [
+        "@type"
+      ]
+    },
+    "AttributeComponent": {
+      "type": "object",
+      "description": "Role given to a represented variable in the context of a data structure to qualify observations or provide other types of supplementary information.",
+      "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "const": "cdi:AttributeComponent"
+          },
+          "minItems": 1
+        },
+        "@id": {
+          "type": "string",
+          "description": "Identifier for this AttributeComponent node"
+        },
+        "cdi:qualifies": {
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "object",
+                "description": "Role given to a represented variable in the context of a data structure.",
+                "properties": {
+                  "@type": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "contains": {
+                      "const": "cdi:DataStructureComponent"
+                    },
+                    "minItems": 1
+                  },
+                  "@id": {
+                    "type": "string",
+                    "description": "Identifier for this DataStructureComponent node"
+                  },
+                  "cdi:identifier": {
+                    "$ref": "#/$defs/Identifier",
+                    "description": "Identifier for objects requiring short- or long-lasting referencing and management."
+                  },
+                  "cdif:isDefinedBy_RepresentedVariable": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/$defs/CdifRepresentedVariable"
+                      },
+                      {
+                        "$ref": "#/$defs/CdifDataStructureComponent_id-reference"
+                      }
+                    ]
+                  },
+                  "cdi:semantic": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/$defs/cdifConceptOrTermOrString"
+                    },
+                    "minItems": 1,
+                    "description": "Qualifies the purpose or use expressed as a paired external controlled vocabulary."
+                  }
+                },
+                "required": [
+                  "@type"
+                ]
+              },
+              {
+                "$ref": "#/$defs/CdifDataStructureComponent_id-reference"
+              }
+            ]
+          },
+          "minItems": 1
+        },
+        "cdi:identifier": {
+          "$ref": "#/$defs/Identifier",
+          "description": "Identifier for objects requiring short- or long-lasting referencing and management."
+        },
+        "cdif:isDefinedBy_RepresentedVariable": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CdifRepresentedVariable"
+            },
+            {
+              "$ref": "#/$defs/CdifDataStructureComponent_id-reference"
+            }
+          ]
+        },
+        "cdi:semantic": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/cdifConceptOrTermOrString"
+          },
+          "minItems": 1,
+          "description": "Qualifies the purpose or use expressed as a paired external controlled vocabulary."
+        }
+      },
+      "required": [
+        "@type"
+      ]
+    },
+    "DimensionComponent": {
+      "type": "object",
+      "description": "Role given to a represented variable in the context of a dimensional data structure to identify the universes associated with data points. The variable acts as a field in the compound identifier (the key structure) to disambiguate the cells in the multi-dimensional \"cube\".  AG: references to the variables which are the components of a compound identifier, in which each variable is a single field - an axis - in a coordinate system addressing a location in a matrix. These variables are often categorical, but also commonly include time. Unlike other Components, they may be ordered using instances of cdi:ComponentPosition.",
+      "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "const": "cdi:DimensionComponent"
+          },
+          "minItems": 1
+        },
+        "@id": {
+          "type": "string",
+          "description": "Identifier for this DimensionComponent node"
+        },
+        "cdif:isDefinedBy_RepresentedVariable": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CdifRepresentedVariable"
+            },
+            {
+              "$ref": "#/$defs/CdifDataStructureComponent_id-reference"
+            }
+          ]
+        }
+      },
+      "required": [
+        "@type",
+        "cdif:isDefinedBy_RepresentedVariable"
+      ]
+    },
+    "VariableValueComponent": {
+      "type": "object",
+      "description": "Role given to a represented variable in the context of a data structure to record values of multiple variables.",
+      "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "const": "cdi:VariableValueComponent"
+          },
+          "minItems": 1
+        },
+        "@id": {
+          "type": "string",
+          "description": "Identifier for this VariableValueComponent node"
+        },
+        "cdi:identifier": {
+          "$ref": "#/$defs/Identifier",
+          "description": "Identifier for objects requiring short- or long-lasting referencing and management."
+        },
+        "cdif:isDefinedBy_RepresentedVariable": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CdifRepresentedVariable"
+            },
+            {
+              "$ref": "#/$defs/CdifDataStructureComponent_id-reference"
+            }
+          ]
+        },
+        "cdi:semantic": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/cdifConceptOrTermOrString"
+          },
+          "minItems": 1,
+          "description": "Qualifies the purpose or use expressed as a paired external controlled vocabulary."
+        }
+      },
+      "required": [
+        "@type"
+      ]
+    },
+    "VariableDescriptorComponent": {
+      "type": "object",
+      "description": "Role given to a represented variable in the context of a data structure to provide codes for variable identification.",
+      "properties": {
+        "@type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "contains": {
+            "const": "cdi:VariableDescriptorComponent"
+          },
+          "minItems": 1
+        },
+        "@id": {
+          "type": "string",
+          "description": "Identifier for this VariableDescriptorComponent node"
+        },
+        "cdif:isDefinedBy_DescriptorVariable": {
+          "title": "DDI-CDI Descriptor Variable",
+          "type": "object",
+          "description": "Variable that provides codes for variable identification in the context of a data structure. Descriptor Variables hold values which reference the logical variables in the data set, indicating which one the associated value in the corresponding Reference Variable is a measure/value for. Descriptor Variables are presentational variables found only in Long Data Sets.",
+          "properties": {
+            "@type": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "contains": {
+                "const": "cdi:DescriptorVariable"
+              },
+              "minItems": 1
+            },
+            "@id": {
+              "type": "string",
+              "description": "Identifier for this DescriptorVariable node"
+            },
+            "cdif:hasValuesFrom": {
+              "type": "object",
+              "description": "A cdi:DescriptorValueDomain enumerating the codes that can appear in the descriptor column, each paired (via cdif:isDefinedBy) with the RepresentedVariable that the code names.",
+              "properties": {
+                "@type": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "contains": {
+                    "const": "cdi:DescriptorValueDomain"
+                  },
+                  "minItems": 1
+                },
+                "@id": {
+                  "type": "string",
+                  "description": "Identifier for this DescriptorValueDomain node"
+                },
+                "cdif:takesValuesFrom": {
+                  "type": "array",
+                  "description": "Ordered list of descriptor entries. Each entry has a cdif:value (the code as it appears in the descriptor column) and a cdif:isDefinedBy pointer to the RepresentedVariable that the code names.",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "cdif:value": {
+                        "type": "string",
+                        "description": "The code value as it appears in the descriptor column."
+                      },
+                      "cdif:isDefinedBy": {
+                        "anyOf": [
+                          {
+                            "$ref": "#/$defs/CdifRepresentedVariable"
+                          },
+                          {
+                            "type": "object",
+                            "description": "object reference via URI or URI fragment to a RepresentedVariable defined elsewhere in the document",
+                            "properties": {
+                              "@id": {
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "@id"
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "required": [
+                      "cdif:value",
+                      "cdif:isDefinedBy"
+                    ]
+                  },
+                  "minItems": 1
+                }
+              },
+              "required": [
+                "@type",
+                "cdif:takesValuesFrom"
+              ]
+            },
+            "cdif:name": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "Human understandable name (linguistic signifier, word, phrase, or mnemonic). May follow ISO/IEC 11179-5 naming principles, and have context provided to specify usage."
+            }
+          },
+          "required": [
+            "@type",
+            "cdif:hasValuesFrom"
+          ]
+        },
+        "cdi:refersTo": {
+          "$ref": "#/$defs/CdifDataStructureComponent_id-reference"
+        },
+        "cdi:identifier": {
+          "$ref": "#/$defs/Identifier",
+          "description": "Identifier for objects requiring short- or long-lasting referencing and management."
+        },
+        "cdi:semantic": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/cdifConceptOrTermOrString"
+          },
+          "minItems": 1,
+          "description": "Qualifies the purpose or use expressed as a paired external controlled vocabulary."
+        }
+      },
+      "required": [
+        "@type",
+        "cdif:isDefinedBy_DescriptorVariable"
+      ]
+    },
+    "CdifRepresentedVariable_id-reference": {
+      "type": "object",
+      "description": "Reference to a node defined elsewhere in the document via its @id.",
+      "properties": {
+        "@id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "@id"
       ]
     },
     "xsdDataType": {
@@ -5384,814 +6948,7 @@
               {
                 "anyOf": [
                   {
-                    "title": "DDI-CDI Represented Variable",
-                    "description": "Conceptual variable with a substantive value domain specified.",
-                    "type": "object",
-                    "properties": {
-                      "@type": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        },
-                        "contains": {
-                          "const": "cdi:RepresentedVariable"
-                        },
-                        "minItems": 1
-                      },
-                      "@id": {
-                        "type": "string",
-                        "description": "Identifier for this RepresentedVariable node"
-                      },
-                      "cdi:describedUnitOfMeasure": {
-                        "$ref": "#/$defs/cdifConceptOrTermOrString",
-                        "description": "The unit in which the data values are measured (kg, pound, euro), expressed as a value from a controlled system of entries (i.e., QDT). Supports the provision of an identifier for the entry in the authoritative source (a URI, etc.), and the specific vocabulary."
-                      },
-                      "cdi:hasIntendedDataType": {
-                        "$ref": "#/$defs/cdifConceptOrTermOrString",
-                        "description": "The data type intended to be used by this variable. Supports the optional use of an external controlled vocabulary."
-                      },
-                      "cdi:takesSentinelValuesFrom": {
-                        "type": "array",
-                        "items": {
-                          "anyOf": [
-                            {
-                              "type": "object",
-                              "description": "Specification of possible sentinel values used by a variable. Sentinel values are special values used to indicate various invalid conditions for a variable, e.g. below detection, missing value.",
-                              "properties": {
-                                "@type": {
-                                  "type": "array",
-                                  "items": {
-                                    "type": "string"
-                                  },
-                                  "contains": {
-                                    "const": "cdif:SentinelValueDomain"
-                                  },
-                                  "minItems": 1
-                                },
-                                "@id": {
-                                  "type": "string",
-                                  "description": "Identifier for this SentinelValueDomain node"
-                                },
-                                "cdif:takesValuesFrom": {
-                                  "anyOf": [
-                                    {
-                                      "title": "CDIF Enumeration Domain",
-                                      "description": "A base class acting as an extension point to allow a codification vocabulary to be documented as enumerated value domain.",
-                                      "type": "object",
-                                      "properties": {
-                                        "@type": {
-                                          "type": "array",
-                                          "items": {
-                                            "type": "string"
-                                          },
-                                          "contains": {
-                                            "const": "cdif:EnumerationDomain"
-                                          },
-                                          "minItems": 1
-                                        },
-                                        "@id": {
-                                          "type": "string",
-                                          "description": "Identifier for this EnumerationDomain node"
-                                        },
-                                        "cdif:identifier": {
-                                          "$ref": "#/$defs/Identifier",
-                                          "description": "Identifier for this enumerated (categorical) domain."
-                                        },
-                                        "schema:name": {
-                                          "type": "string",
-                                          "description": "Human understandable name (liguistic signifier, word, phrase, or mnemonic)."
-                                        },
-                                        "cdif:references": {
-                                          "description": "CDIF codelist (skos:ConceptScheme) whose concepts define the allowed values of this enumeration domain.",
-                                          "anyOf": [
-                                            {
-                                              "type": "object",
-                                              "title": "CDIF Codelist",
-                                              "description": "A controlled-vocabulary codelist implemented as a skos:ConceptScheme constrained for CDIF use. The scheme must have a resolvable @id and identify its top concepts via skos:hasTopConcept; each concept (CdifCodelistConcept) must have a resolvable @id, skos:inScheme, skos:prefLabel, and skos:notation. Hierarchical concepts must declare both skos:narrower (for JSON tree traversal) and skos:broader (for upward navigation) where hierarchy exists. CDIF metadata properties (schema:identifier, schema:dateModified, schema:license or schema:conditionsOfAccess) take precedence over the equivalent dcterms properties from the base skos:ConceptScheme.",
-                                              "properties": {
-                                                "@context": {
-                                                  "description": "JSON-LD context (an object) declaring the skos namespace prefix and any additional prefixes used in concept URIs.",
-                                                  "type": "object",
-                                                  "properties": {
-                                                    "skos": {
-                                                      "const": "http://www.w3.org/2004/02/skos/core#"
-                                                    }
-                                                  },
-                                                  "required": [
-                                                    "skos"
-                                                  ]
-                                                },
-                                                "@id": {
-                                                  "type": "string",
-                                                  "description": "URI identifier for this concept scheme."
-                                                },
-                                                "@type": {
-                                                  "type": "array",
-                                                  "items": {
-                                                    "type": "string"
-                                                  },
-                                                  "contains": {
-                                                    "const": "skos:ConceptScheme"
-                                                  },
-                                                  "minItems": 1
-                                                },
-                                                "schema:identifier": {
-                                                  "description": "Primary identifier for the codelist. May be a string URI or a structured PropertyValue.",
-                                                  "anyOf": [
-                                                    {
-                                                      "type": "string"
-                                                    },
-                                                    {
-                                                      "type": "object",
-                                                      "properties": {
-                                                        "@type": {
-                                                          "type": "array",
-                                                          "items": {
-                                                            "type": "string"
-                                                          },
-                                                          "contains": {
-                                                            "const": "schema:PropertyValue"
-                                                          }
-                                                        },
-                                                        "schema:propertyID": {
-                                                          "type": "string"
-                                                        },
-                                                        "schema:value": {
-                                                          "type": "string"
-                                                        },
-                                                        "schema:url": {
-                                                          "type": "string"
-                                                        }
-                                                      }
-                                                    }
-                                                  ]
-                                                },
-                                                "schema:dateModified": {
-                                                  "type": "string",
-                                                  "description": "ISO 8601 date when the codelist was last modified."
-                                                },
-                                                "schema:url": {
-                                                  "type": "string",
-                                                  "format": "uri",
-                                                  "description": "Web location of a page describing the codelist.",
-                                                  "default": "missing"
-                                                },
-                                                "schema:license": {
-                                                  "description": "License for the codelist.",
-                                                  "type": "array",
-                                                  "items": {
-                                                    "anyOf": [
-                                                      {
-                                                        "type": "string"
-                                                      },
-                                                      {
-                                                        "type": "object",
-                                                        "properties": {
-                                                          "@id": {
-                                                            "type": "string"
-                                                          }
-                                                        }
-                                                      }
-                                                    ]
-                                                  }
-                                                },
-                                                "schema:conditionsOfAccess": {
-                                                  "description": "Text statement of access conditions for the codelist.",
-                                                  "type": "array",
-                                                  "items": {
-                                                    "type": "string"
-                                                  }
-                                                },
-                                                "skos:prefLabel": {
-                                                  "description": "Preferred lexical label for the concept scheme. A single string, a single language-tagged value, or an array of language-tagged values. Each language should appear at most once.",
-                                                  "type": "string"
-                                                },
-                                                "skos:definition": {
-                                                  "description": "Formal explanation of the meaning or purpose of this concept scheme.",
-                                                  "type": "string"
-                                                },
-                                                "skos:note": {
-                                                  "description": "General note about the concept scheme.",
-                                                  "type": "string"
-                                                },
-                                                "skos:hasTopConcept": {
-                                                  "description": "Top-level concepts that have no skos:broader in this scheme. Required for hierarchical codelists.",
-                                                  "type": "array",
-                                                  "minItems": 1,
-                                                  "items": {
-                                                    "$ref": "#/$defs/CdifCodelistConcept"
-                                                  }
-                                                },
-                                                "schema:subjectOf": {
-                                                  "description": "Catalog record describing this codelist as CDIF-conformant metadata. Must declare conformance to the cdifCodelist profile via dcterms:conformsTo and be typed as schema:Dataset with schema:additionalType including dcat:CatalogRecord.",
-                                                  "type": "object",
-                                                  "properties": {
-                                                    "@type": {
-                                                      "type": "array",
-                                                      "items": {
-                                                        "type": "string"
-                                                      },
-                                                      "contains": {
-                                                        "const": "schema:Dataset"
-                                                      },
-                                                      "minItems": 1
-                                                    },
-                                                    "schema:additionalType": {
-                                                      "type": "array",
-                                                      "items": {
-                                                        "type": "string"
-                                                      },
-                                                      "contains": {
-                                                        "const": "dcat:CatalogRecord"
-                                                      },
-                                                      "minItems": 1
-                                                    },
-                                                    "dcterms:conformsTo": {
-                                                      "type": "array",
-                                                      "items": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                          "@id": {
-                                                            "type": "string"
-                                                          }
-                                                        },
-                                                        "required": [
-                                                          "@id"
-                                                        ]
-                                                      },
-                                                      "contains": {
-                                                        "type": "object",
-                                                        "properties": {
-                                                          "@id": {
-                                                            "const": "https://w3id.org/cdif/codelist/1.1"
-                                                          }
-                                                        }
-                                                      },
-                                                      "minItems": 1
-                                                    },
-                                                    "@id": {
-                                                      "type": "string",
-                                                      "description": "Identifier for the catalog record."
-                                                    },
-                                                    "schema:about": {
-                                                      "type": "object",
-                                                      "properties": {
-                                                        "@id": {
-                                                          "type": "string"
-                                                        }
-                                                      },
-                                                      "required": [
-                                                        "@id"
-                                                      ]
-                                                    }
-                                                  },
-                                                  "required": [
-                                                    "@type",
-                                                    "schema:additionalType",
-                                                    "dcterms:conformsTo"
-                                                  ]
-                                                }
-                                              },
-                                              "anyOf": [
-                                                {
-                                                  "required": [
-                                                    "schema:license"
-                                                  ]
-                                                },
-                                                {
-                                                  "required": [
-                                                    "schema:conditionsOfAccess"
-                                                  ]
-                                                }
-                                              ],
-                                              "required": [
-                                                "@id",
-                                                "skos:prefLabel",
-                                                "schema:identifier",
-                                                "schema:dateModified",
-                                                "skos:hasTopConcept"
-                                              ]
-                                            },
-                                            {
-                                              "type": "object",
-                                              "description": "object reference via URI or URI fragment referencing an @id in the same document",
-                                              "properties": {
-                                                "@id": {
-                                                  "type": "string"
-                                                }
-                                              }
-                                            }
-                                          ]
-                                        },
-                                        "cdif:purpose": {
-                                          "type": "string",
-                                          "description": "Intent or reason for the object/the description of the object."
-                                        }
-                                      },
-                                      "required": [
-                                        "@type",
-                                        "cdif:references"
-                                      ]
-                                    },
-                                    {
-                                      "type": "object",
-                                      "description": "JSON-LD @id reference to a node defined elsewhere in the graph",
-                                      "properties": {
-                                        "@id": {
-                                          "type": "string",
-                                          "description": "IRI or blank node identifier of the referenced node"
-                                        }
-                                      },
-                                      "required": [
-                                        "@id"
-                                      ]
-                                    }
-                                  ]
-                                },
-                                "cdif:displayLabel": {
-                                  "type": "string",
-                                  "description": "A human-readable display label for the object. Supports the use of multiple languages. Repeat for labels with different content, for example, labels with differing length limitations."
-                                },
-                                "cdif:recommendedDataType": {
-                                  "type": "array",
-                                  "description": "The data types that are recommended for use with this domain.",
-                                  "items": {
-                                    "$ref": "#/$defs/xsdDataType"
-                                  },
-                                  "minItems": 1
-                                },
-                                "cdi:isDescribedBy": {
-                                  "description": "A ValueAndConceptDescription giving the formal description (ranges, patterns, classification level, expressions) of the values this domain admits.",
-                                  "anyOf": [
-                                    {
-                                      "$ref": "#/$defs/ValueAndConceptDescription"
-                                    },
-                                    {
-                                      "type": "object",
-                                      "description": "JSON-LD @id reference to a node defined elsewhere in the graph",
-                                      "properties": {
-                                        "@id": {
-                                          "type": "string",
-                                          "description": "IRI or blank node identifier of the referenced node"
-                                        }
-                                      },
-                                      "required": [
-                                        "@id"
-                                      ]
-                                    }
-                                  ]
-                                }
-                              },
-                              "required": [
-                                "@type"
-                              ],
-                              "anyOf": [
-                                {
-                                  "required": [
-                                    "cdif:takesValuesFrom"
-                                  ]
-                                },
-                                {
-                                  "required": [
-                                    "cdif:recommendedDataType"
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "$comment": "unresolved fragment ref: #/$defs/id-reference"
-                            }
-                          ]
-                        },
-                        "minItems": 1,
-                        "description": "Sentinel (missing / not-applicable) value domain(s) for this RepresentedVariable (RepresentedVariable.takesSentinelValuesFrom)."
-                      },
-                      "cdi:takesSubstantiveValuesFrom": {
-                        "anyOf": [
-                          {
-                            "type": "object",
-                            "description": "Value domain for a substantive conceptual domain. Typically a description and/or enumeration of allowed values of interest.",
-                            "properties": {
-                              "@type": {
-                                "type": "array",
-                                "items": {
-                                  "type": "string"
-                                },
-                                "contains": {
-                                  "const": "cdif:SubstantiveValueDomain"
-                                },
-                                "minItems": 1
-                              },
-                              "@id": {
-                                "type": "string",
-                                "description": "Identifier for this SubstantiveValueDomain node"
-                              },
-                              "cdif:takesValuesFrom": {
-                                "anyOf": [
-                                  {
-                                    "title": "CDIF Enumeration Domain",
-                                    "description": "A base class acting as an extension point to allow a codification vocabulary to be documented as enumerated value domain.",
-                                    "type": "object",
-                                    "properties": {
-                                      "@type": {
-                                        "type": "array",
-                                        "items": {
-                                          "type": "string"
-                                        },
-                                        "contains": {
-                                          "const": "cdif:EnumerationDomain"
-                                        },
-                                        "minItems": 1
-                                      },
-                                      "@id": {
-                                        "type": "string",
-                                        "description": "Identifier for this EnumerationDomain node"
-                                      },
-                                      "cdif:identifier": {
-                                        "$ref": "#/$defs/Identifier",
-                                        "description": "Identifier for this enumerated (categorical) domain."
-                                      },
-                                      "schema:name": {
-                                        "type": "string",
-                                        "description": "Human understandable name (liguistic signifier, word, phrase, or mnemonic)."
-                                      },
-                                      "cdif:references": {
-                                        "description": "CDIF codelist (skos:ConceptScheme) whose concepts define the allowed values of this enumeration domain.",
-                                        "anyOf": [
-                                          {
-                                            "type": "object",
-                                            "title": "CDIF Codelist",
-                                            "description": "A controlled-vocabulary codelist implemented as a skos:ConceptScheme constrained for CDIF use. The scheme must have a resolvable @id and identify its top concepts via skos:hasTopConcept; each concept (CdifCodelistConcept) must have a resolvable @id, skos:inScheme, skos:prefLabel, and skos:notation. Hierarchical concepts must declare both skos:narrower (for JSON tree traversal) and skos:broader (for upward navigation) where hierarchy exists. CDIF metadata properties (schema:identifier, schema:dateModified, schema:license or schema:conditionsOfAccess) take precedence over the equivalent dcterms properties from the base skos:ConceptScheme.",
-                                            "properties": {
-                                              "@context": {
-                                                "description": "JSON-LD context (an object) declaring the skos namespace prefix and any additional prefixes used in concept URIs.",
-                                                "type": "object",
-                                                "properties": {
-                                                  "skos": {
-                                                    "const": "http://www.w3.org/2004/02/skos/core#"
-                                                  }
-                                                },
-                                                "required": [
-                                                  "skos"
-                                                ]
-                                              },
-                                              "@id": {
-                                                "type": "string",
-                                                "description": "URI identifier for this concept scheme."
-                                              },
-                                              "@type": {
-                                                "type": "array",
-                                                "items": {
-                                                  "type": "string"
-                                                },
-                                                "contains": {
-                                                  "const": "skos:ConceptScheme"
-                                                },
-                                                "minItems": 1
-                                              },
-                                              "schema:identifier": {
-                                                "description": "Primary identifier for the codelist. May be a string URI or a structured PropertyValue.",
-                                                "anyOf": [
-                                                  {
-                                                    "type": "string"
-                                                  },
-                                                  {
-                                                    "type": "object",
-                                                    "properties": {
-                                                      "@type": {
-                                                        "type": "array",
-                                                        "items": {
-                                                          "type": "string"
-                                                        },
-                                                        "contains": {
-                                                          "const": "schema:PropertyValue"
-                                                        }
-                                                      },
-                                                      "schema:propertyID": {
-                                                        "type": "string"
-                                                      },
-                                                      "schema:value": {
-                                                        "type": "string"
-                                                      },
-                                                      "schema:url": {
-                                                        "type": "string"
-                                                      }
-                                                    }
-                                                  }
-                                                ]
-                                              },
-                                              "schema:dateModified": {
-                                                "type": "string",
-                                                "description": "ISO 8601 date when the codelist was last modified."
-                                              },
-                                              "schema:url": {
-                                                "type": "string",
-                                                "format": "uri",
-                                                "description": "Web location of a page describing the codelist.",
-                                                "default": "missing"
-                                              },
-                                              "schema:license": {
-                                                "description": "License for the codelist.",
-                                                "type": "array",
-                                                "items": {
-                                                  "anyOf": [
-                                                    {
-                                                      "type": "string"
-                                                    },
-                                                    {
-                                                      "type": "object",
-                                                      "properties": {
-                                                        "@id": {
-                                                          "type": "string"
-                                                        }
-                                                      }
-                                                    }
-                                                  ]
-                                                }
-                                              },
-                                              "schema:conditionsOfAccess": {
-                                                "description": "Text statement of access conditions for the codelist.",
-                                                "type": "array",
-                                                "items": {
-                                                  "type": "string"
-                                                }
-                                              },
-                                              "skos:prefLabel": {
-                                                "description": "Preferred lexical label for the concept scheme. A single string, a single language-tagged value, or an array of language-tagged values. Each language should appear at most once.",
-                                                "type": "string"
-                                              },
-                                              "skos:definition": {
-                                                "description": "Formal explanation of the meaning or purpose of this concept scheme.",
-                                                "type": "string"
-                                              },
-                                              "skos:note": {
-                                                "description": "General note about the concept scheme.",
-                                                "type": "string"
-                                              },
-                                              "skos:hasTopConcept": {
-                                                "description": "Top-level concepts that have no skos:broader in this scheme. Required for hierarchical codelists.",
-                                                "type": "array",
-                                                "minItems": 1,
-                                                "items": {
-                                                  "$ref": "#/$defs/CdifCodelistConcept"
-                                                }
-                                              },
-                                              "schema:subjectOf": {
-                                                "description": "Catalog record describing this codelist as CDIF-conformant metadata. Must declare conformance to the cdifCodelist profile via dcterms:conformsTo and be typed as schema:Dataset with schema:additionalType including dcat:CatalogRecord.",
-                                                "type": "object",
-                                                "properties": {
-                                                  "@type": {
-                                                    "type": "array",
-                                                    "items": {
-                                                      "type": "string"
-                                                    },
-                                                    "contains": {
-                                                      "const": "schema:Dataset"
-                                                    },
-                                                    "minItems": 1
-                                                  },
-                                                  "schema:additionalType": {
-                                                    "type": "array",
-                                                    "items": {
-                                                      "type": "string"
-                                                    },
-                                                    "contains": {
-                                                      "const": "dcat:CatalogRecord"
-                                                    },
-                                                    "minItems": 1
-                                                  },
-                                                  "dcterms:conformsTo": {
-                                                    "type": "array",
-                                                    "items": {
-                                                      "type": "object",
-                                                      "properties": {
-                                                        "@id": {
-                                                          "type": "string"
-                                                        }
-                                                      },
-                                                      "required": [
-                                                        "@id"
-                                                      ]
-                                                    },
-                                                    "contains": {
-                                                      "type": "object",
-                                                      "properties": {
-                                                        "@id": {
-                                                          "const": "https://w3id.org/cdif/codelist/1.1"
-                                                        }
-                                                      }
-                                                    },
-                                                    "minItems": 1
-                                                  },
-                                                  "@id": {
-                                                    "type": "string",
-                                                    "description": "Identifier for the catalog record."
-                                                  },
-                                                  "schema:about": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                      "@id": {
-                                                        "type": "string"
-                                                      }
-                                                    },
-                                                    "required": [
-                                                      "@id"
-                                                    ]
-                                                  }
-                                                },
-                                                "required": [
-                                                  "@type",
-                                                  "schema:additionalType",
-                                                  "dcterms:conformsTo"
-                                                ]
-                                              }
-                                            },
-                                            "anyOf": [
-                                              {
-                                                "required": [
-                                                  "schema:license"
-                                                ]
-                                              },
-                                              {
-                                                "required": [
-                                                  "schema:conditionsOfAccess"
-                                                ]
-                                              }
-                                            ],
-                                            "required": [
-                                              "@id",
-                                              "skos:prefLabel",
-                                              "schema:identifier",
-                                              "schema:dateModified",
-                                              "skos:hasTopConcept"
-                                            ]
-                                          },
-                                          {
-                                            "type": "object",
-                                            "description": "object reference via URI or URI fragment referencing an @id in the same document",
-                                            "properties": {
-                                              "@id": {
-                                                "type": "string"
-                                              }
-                                            }
-                                          }
-                                        ]
-                                      },
-                                      "cdif:purpose": {
-                                        "type": "string",
-                                        "description": "Intent or reason for the object/the description of the object."
-                                      }
-                                    },
-                                    "required": [
-                                      "@type",
-                                      "cdif:references"
-                                    ]
-                                  },
-                                  {
-                                    "type": "object",
-                                    "description": "JSON-LD @id reference to a node defined elsewhere in the graph",
-                                    "properties": {
-                                      "@id": {
-                                        "type": "string",
-                                        "description": "IRI or blank node identifier of the referenced node"
-                                      }
-                                    },
-                                    "required": [
-                                      "@id"
-                                    ]
-                                  }
-                                ]
-                              },
-                              "cdif:displayLabel": {
-                                "type": "string",
-                                "description": "A human-readable display label for the object. "
-                              },
-                              "cdif:recommendedDataType": {
-                                "type": "array",
-                                "description": "The data types that are recommended for use with this domain.",
-                                "items": {
-                                  "$ref": "#/$defs/xsdDataType"
-                                },
-                                "minItems": 1
-                              },
-                              "cdi:isDescribedBy": {
-                                "description": "A ValueAndConceptDescription giving the formal description (ranges, patterns, classification level, expressions) of the values this domain admits.",
-                                "anyOf": [
-                                  {
-                                    "$ref": "#/$defs/ValueAndConceptDescription"
-                                  },
-                                  {
-                                    "type": "object",
-                                    "description": "JSON-LD @id reference to a node defined elsewhere in the graph",
-                                    "properties": {
-                                      "@id": {
-                                        "type": "string",
-                                        "description": "IRI or blank node identifier of the referenced node"
-                                      }
-                                    },
-                                    "required": [
-                                      "@id"
-                                    ]
-                                  }
-                                ]
-                              }
-                            },
-                            "required": [
-                              "@type"
-                            ],
-                            "anyOf": [
-                              {
-                                "required": [
-                                  "cdif:takesValuesFrom"
-                                ]
-                              },
-                              {
-                                "required": [
-                                  "cdif:recommendedDataType"
-                                ]
-                              }
-                            ]
-                          },
-                          {
-                            "$comment": "unresolved fragment ref: #/$defs/id-reference"
-                          }
-                        ],
-                        "description": "The substantive value domain for this RepresentedVariable - the set of valid, meaningful values (RepresentedVariable.takesSubstantiveValuesFrom)."
-                      },
-                      "cdi:simpleUnitOfMeasure": {
-                        "type": "string",
-                        "description": "The unit in which the data values are measured (kg, pound, euro), expressed as a simple string, in cases where no additional information is available (in the legacy system) or needed (as in the case of broad agreement within the community of use [i.e., ISO country codes, currencies, etc. in SDMX])"
-                      },
-                      "cdif:descriptiveText": {
-                        "type": "string",
-                        "description": "A short natural language account of the characteristics of the object."
-                      },
-                      "cdi:measures": {
-                        "anyOf": [
-                          {
-                            "$comment": "unresolved fragment ref: #/$defs/UnitType"
-                          },
-                          {
-                            "$comment": "unresolved fragment ref: #/$defs/id-reference"
-                          }
-                        ]
-                      },
-                      "cdi:unitOfMeasureKind": {
-                        "$ref": "#/$defs/cdifConceptOrTermOrString",
-                        "description": "Kind of unit of measure, so that it may be prone to translation to equivalent UOMs. Example values include \"acceleration,\" \"temperature,\" \"salinity\", etc. This description exists at the conceptual level, indicating a limitation on the type of representations which may be used for the variable as it is made more concrete."
-                      },
-                      "cdif:definition": {
-                        "type": "string",
-                        "description": "Natural language statement conveying the meaning of a concept, differentiating it from other concepts. Supports the use of multiple languages and structured text. 'externalDefinition' can't be used if 'definition' is used."
-                      },
-                      "cdif:displayLabel": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        },
-                        "minItems": 1,
-                        "description": "A human-readable display label for the object. Supports the use of multiple languages. Repeat for labels with different content, for example, labels with differing length limitations."
-                      },
-                      "cdi:externalDefinition": {
-                        "$comment": "unresolved fragment ref: #/$defs/Reference",
-                        "description": "A reference to an external definition of a concept (that is, a concept which is described outside the content of the DDI-CDI metadata description). An example is a SKOS concept. The definition property is assumed to duplicate the external one referenced if externalDefinition is used. Other corresponding properties are assumed to be included unchanged if used."
-                      },
-                      "cdi:identifier": {
-                        "$ref": "#/$defs/Identifier",
-                        "description": "Identifier for objects requiring short- or long-lasting referencing and management."
-                      },
-                      "cdif:name": {
-                        "type": "array",
-                        "items": {
-                          "type": "string"
-                        },
-                        "minItems": 1,
-                        "description": "Human understandable name (linguistic signifier, word, phrase, or mnemonic). May follow ISO/IEC 11179-5 naming principles, and have context provided to specify usage."
-                      },
-                      "cdif:uses_Concept": {
-                        "type": "array",
-                        "items": {
-                          "anyOf": [
-                            {
-                              "title": "SKOS Concept",
-                              "description": "JSON Schema for a SKOS Concept in JSON-LD form. A unit of thought within a concept scheme. Supports labels (prefLabel, altLabel, hiddenLabel), notations, hierarchical relations (broader/narrower), associative relations (related), cross-scheme mapping properties, scheme membership, and documentary notes. Based on the W3C SKOS Reference (https://www.w3.org/TR/skos-reference/).",
-                              "allOf": [
-                                {
-                                  "$ref": "#/$defs/Concept"
-                                }
-                              ]
-                            },
-                            {
-                              "$comment": "unresolved fragment ref: #/$defs/id-reference"
-                            }
-                          ]
-                        },
-                        "minItems": 1
-                      }
-                    },
-                    "required": [
-                      "@type"
-                    ]
+                    "$ref": "#/$defs/CdifRepresentedVariable"
                   },
                   {
                     "$ref": "#/$defs/id-reference"
@@ -6290,6 +7047,18 @@
       "required": [
         "@value",
         "@language"
+      ]
+    },
+    "CdifDataStructureComponent_id-reference": {
+      "type": "object",
+      "description": "Reference to a node defined elsewhere in the document via its @id.",
+      "properties": {
+        "@id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "@id"
       ]
     }
   }
