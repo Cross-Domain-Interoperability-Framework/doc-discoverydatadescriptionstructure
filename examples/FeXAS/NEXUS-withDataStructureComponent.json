@@ -1,0 +1,530 @@
+{
+  "@context": {
+    "schema": "http://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "dqv": "http://www.w3.org/ns/dqv#",
+    "geosparql": "http://www.opengis.net/ont/geosparql#",
+    "spdx": "http://spdx.org/rdf/terms#",
+    "time": "http://www.w3.org/2006/time#",
+    "sf": "http://www.opengis.net/ont/sf#",
+    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "cdif": "https://w3id.org/cdif/",
+    "csvw": "http://www.w3.org/ns/csvw#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "ada": "https://ada.astromat.org/metadata/",
+    "xas": "https://ada.astromat.org/metadata/xas/",
+    "nxs": "https://manual.nexusformat.org/classes/"
+  },
+  "@id": "xas:fe_c3d.001",
+  "@type": [
+    "schema:Dataset",
+    "schema:Product"
+  ],
+  "cdi:isStructuredBy": {
+    "@id": "ex:testComplexStructure_346",
+    "@type": [
+      "cdi:DimensionalDataStructure"
+    ],
+    "cdi:has_DataStructureComponent": [
+      {
+        "@type": [
+          "http://example.org/base/DimensionComponent"
+        ],
+        "cdi:isDefinedBy_InstanceVariable": {
+          "@id": "xas:Monochromator_Energy_Variable",
+          "@type": [
+            "cdi:InstanceVariable",
+            "schema:PropertyValue"
+          ],
+          "schema:maxValue": 7380.83,
+          "schema:minValue": 7052,
+          "schema:name": "energy",
+          "schema:propertyID": [
+            "xas:Monochromator_Energy"
+          ],
+          "schema:unitText": "eV",
+          "schame:alternateName": [
+            "Monochromator energy",
+            "mono energy"
+          ]
+        }
+      },
+      {
+        "@type": [
+          "http://example.org/base/MeasureComponent"
+        ],
+        "cdi:isDefinedBy_InstanceVariable": {
+          "@id": "xas:Incident_Intensity_Variable",
+          "@type": [
+            "http://example.org/base/InstanceVariable",
+            "schema:PropertyValue"
+          ],
+          "schema:alternateName": "Monitor intensity",
+          "schema:name": "i0",
+          "schema:propertyID": "xas:Incident_Intensity",
+          "schema:unitText": "counts"
+        }
+      },
+      {
+        "@type": [
+          "http://example.org/base/MeasureComponent"
+        ],
+        "cdi:isDefinedBy_InstanceVariable": {
+          "@id": "xas:Fluorescence_Intensity_Variable",
+          "@type": [
+            "cdi:InstanceVariable",
+            "schema:PropertyValue"
+          ],
+          "schema:alternateName": [
+            "fluorescence intensity"
+          ],
+          "schema:name": "ifluor",
+          "schema:propertyID": [
+            "xas:Fluorescence_Intensity"
+          ],
+          "schema:unitText": "counts"
+        }
+      },
+      {
+        "@type": [
+          "http://example.org/base/MeasureComponent"
+        ],
+        "cdi:isDefinedBy_InstanceVariable": {
+          "@id": "xas:Fluorescence_Absorption_Coefficient_Variable"
+        }
+      },
+      {
+        "@id": "xas:fec3d001RawData",
+        "@type": [
+          "cdi:WideDataStructure"
+        ],
+        "cdifq:nColumns": 9,
+        "cdifq:nRows": 443,
+        "cdi:has_DataStructureComponent": [
+          {
+            "@type": [
+              "cdi:IdentifierComponent"
+            ],
+            "cdi:has_ValueMappingPosition": 0,
+            "cdif:isDefinedBy_RepresentedVariable": [
+              {
+                "@id": "xas:Monochromator_Energy_Variable"
+              }
+            ],
+            "cdi:name": "energy"
+          },
+          {
+            "@type": [
+              "cdi:MeasureComponent"
+            ],
+            "cdi:has_ValueMappingPosition": 1,
+            "cdif:isDefinedBy_RepresentedVariable": [
+              {
+                "@id": "xas:tscaler_Variable"
+              }
+            ],
+            "cdi:name": "tscaler"
+          },
+          {
+            "@type": [
+              "cdi:MeasureComponent"
+            ],
+            "cdi:has_ValueMappingPosition": 2,
+            "cdif:isDefinedBy_RepresentedVariable": [
+              {
+                "@id": "xas:Incident_Intensity_Variable"
+              }
+            ],
+            "cdi:name": "i0"
+          },
+          {
+            "@type": [
+              "cdi:MeasureComponent"
+            ],
+            "cdi:has_ValueMappingPosition": 3,
+            "cdif:isDefinedBy_RepresentedVariable": [
+              {
+                "@id": "xas:i1_Variable"
+              }
+            ],
+            "cdi:name": "i1"
+          },
+          {
+            "@type": [
+              "cdi:MeasureComponent"
+            ],
+            "cdi:has_ValueMappingPosition": 4,
+            "cdif:isDefinedBy_RepresentedVariable": [
+              {
+                "@id": "xas:i2_Variable"
+              }
+            ],
+            "cdi:name": "i2"
+          },
+          {
+            "@type": [
+              "cdi:MeasureComponent"
+            ],
+            "cdi:has_ValueMappingPosition": 5,
+            "cdif:isDefinedBy_RepresentedVariable": [
+              {
+                "@id": "xas:sum_outputcounts_Variable"
+              }
+            ],
+            "cdi:name": "sum_outputcounts"
+          },
+          {
+            "@type": [
+              "cdi:MeasureComponent"
+            ],
+            "cdi:has_ValueMappingPosition": 6,
+            "cdif:isDefinedBy_RepresentedVariable": [
+              {
+                "@id": "xas:sum_fe_ka_Variable"
+              }
+            ],
+            "cdi:name": "sum_fe_ka"
+          },
+          {
+            "@type": [
+              "cdi:MeasureComponent"
+            ],
+            "cdi:has_ValueMappingPosition": 7,
+            "cdif:isDefinedBy_RepresentedVariable": [
+              {
+                "@id": "xas:outputcounts_mcal_Variable"
+              }
+            ],
+            "cdi:name": "outputcounts_mca1"
+          },
+          {
+            "@type": [
+              "cdi:MeasureComponent"
+            ],
+            "cdi:has_ValueMappingPosition": 8,
+            "cdif:isDefinedBy_RepresentedVariable": [
+              {
+                "@id": "xas:outputcounts_mca2_Variable"
+              }
+            ],
+            "cdi:name": "outputcounts_mca2"
+          }
+        ],
+        "cdi:isDefinedBy_InstanceVariable": {
+          "@id": "xas:Raw_Data_Variable",
+          "@type": [
+            "cdi:InstanceVariable",
+            "schema:PropertyValue"
+          ],
+          "schema:alternateName": [
+            "raw data array"
+          ],
+          "schema:name": "data"
+        },
+        "schema:description": "this is the raw data in an array, represented here as a 35 column table with 443 rows",
+        "schema:name": "data"
+      }
+    ]
+  },
+  "schema:contentUrl": "https://millenia.cars.aps.anl.gov/nxxas/MultiSpectrumFiles/FeXAS.nxs",
+  "schema:description": "HDF5 file declared to conform with NEXUS NXxas application definition; the described data is one NEXUS entry in this file, which contains 26 total spectra, each as separate NEXUS entry",
+  "schema:distribution": [
+    {
+      "@type": [
+        "schema:DataDownload",
+        "cdi:StructuredDataset"
+      ],
+      "cdi:allowsDuplicates": false,
+      "cdi:has_LocatorMapping": [
+        {
+          "@type": [
+            "cdi:LocatorMapping"
+          ],
+          "cdifq:length": 443,
+          "cdi:formats": {
+            "@id": "xas:Monochromator_Energy_Variable",
+            "@type": [
+              "cdi:InstanceVariable",
+              "schema:PropertyValue"
+            ],
+            "schema:maxValue": 7380.83,
+            "schema:minValue": 7052,
+            "schema:name": "energy",
+            "schema:propertyID": [
+              "xas:Monochromator_Energy"
+            ],
+            "schema:unitText": "eV",
+            "schame:alternateName": [
+              "Monochromator energy",
+              "mono energy"
+            ]
+          },
+          "cdi:locator": "Fe_c3d.001/instrument/monochromator/energy"
+        },
+        {
+          "@type": [
+            "cdi:LocatorMapping"
+          ],
+          "cdi:formats": {
+            "@id": "xas:Incident_Intensity_Variable",
+            "@type": [
+              "http://example.org/base/InstanceVariable",
+              "schema:PropertyValue"
+            ],
+            "schema:alternateName": "Monitor intensity",
+            "schema:name": "i0",
+            "schema:propertyID": "xas:Incident_Intensity",
+            "schema:unitText": "counts"
+          },
+          "cdi:locator": "Fe_c3d.001/instrument/i0/data"
+        },
+        {
+          "@type": [
+            "cdi:LocatorMapping"
+          ],
+          "cdi:formats": {
+            "@id": "xas:Fluorescence_Intensity_Variable",
+            "@type": [
+              "cdi:InstanceVariable",
+              "schema:PropertyValue"
+            ],
+            "schema:alternateName": [
+              "fluorescence intensity"
+            ],
+            "schema:name": "ifluor",
+            "schema:propertyID": [
+              "xas:Fluorescence_Intensity"
+            ],
+            "schema:unitText": "counts"
+          },
+          "cdi:locator": "Fe_c3d.001/instrument/ifluor/data"
+        },
+        {
+          "@type": [
+            "cdi:LocatorMapping"
+          ],
+          "cdifq:shape": [
+            443,
+            9
+          ],
+          "cdi:formats": {
+            "@id": "xas:Raw_Data_Variable",
+            "@type": [
+              "cdi:InstanceVariable",
+              "schema:PropertyValue"
+            ],
+            "schema:alternateName": [
+              "raw data array"
+            ],
+            "schema:name": "data"
+          },
+          "cdi:locator": "Fe_c3d.001/scan/data"
+        }
+      ],
+      "dcterms:conformsTo": [
+        {
+          "@id": "https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/spec.md"
+        }
+      ],
+      "schema:contentSize": "30 kb",
+      "schema:contentUrl": "https://github.com/XraySpectroscopy/XASDataLibrary/blob/master/data/Se/Se_Na2SeO4_rt_01.xdi",
+      "schema:description": "Distribution = PhysicalDataSet text file conformant with XDI specification",
+      "schema:encodingFormat": [
+        "text/plain"
+      ]
+    }
+  ],
+  "schema:identifier": "https://doi.org/10.xxxxx/fe_c3d001",
+  "schema:name": "X-ray fluorescence spectra for K edge, Iron c3d",
+  "schema:variableMeasured": [
+    {
+      "@id": "xas:Monochromator_Energy_Variable",
+      "@type": [
+        "cdi:InstanceVariable",
+        "schema:PropertyValue"
+      ],
+      "schema:maxValue": 7380.83,
+      "schema:minValue": 7052,
+      "schema:name": "energy",
+      "schema:propertyID": [
+        "xas:Monochromator_Energy"
+      ],
+      "schema:unitText": "eV",
+      "schame:alternateName": [
+        "Monochromator energy",
+        "mono energy"
+      ],
+      "cdif:uses": [
+        {
+          "@id": "xas:Monochromator_Energy_Variable"
+        }
+      ]
+    },
+    {
+      "@id": "xas:Incident_Intensity_Variable",
+      "@type": [
+        "cdi:InstanceVariable",
+        "schema:PropertyValue"
+      ],
+      "schema:alternateName": [
+        "Monitor intensity"
+      ],
+      "schema:name": "i0",
+      "schema:propertyID": [
+        "xas:Incident_Intensity"
+      ],
+      "schema:unitText": "counts",
+      "cdif:uses": [
+        {
+          "@id": "xas:Incident_Intensity_Variable"
+        }
+      ]
+    },
+    {
+      "@id": "xas:Fluorescence_Intensity_Variable",
+      "@type": [
+        "cdi:InstanceVariable",
+        "schema:PropertyValue"
+      ],
+      "schema:alternateName": [
+        "fluorescence intensity"
+      ],
+      "schema:name": "ifluor",
+      "schema:propertyID": [
+        "xas:Fluorescence_Intensity"
+      ],
+      "schema:unitText": "counts",
+      "cdif:uses": [
+        {
+          "@id": "xas:sum_fe_ka_Variable"
+        }
+      ]
+    },
+    {
+      "@id": "xas:Raw_Data_Variable",
+      "@type": [
+        "cdi:InstanceVariable",
+        "schema:PropertyValue"
+      ],
+      "schema:alternateName": [
+        "raw data array"
+      ],
+      "schema:name": "data"
+    },
+    {
+      "@type": [
+        "cdi:InstanceVariable",
+        "schema:PropertyValue"
+      ],
+      "schema:name": "tscaler",
+      "cdif:uses": [
+        {
+          "@id": "xas:tscaler_Variable"
+        }
+      ],
+      "@id": "xas:tscaler_IV"
+    },
+    {
+      "@type": [
+        "cdi:InstanceVariable",
+        "schema:PropertyValue"
+      ],
+      "schema:name": "i1",
+      "cdif:uses": [
+        {
+          "@id": "xas:i1_Variable"
+        }
+      ],
+      "@id": "xas:i1_IV"
+    },
+    {
+      "@type": [
+        "cdi:InstanceVariable",
+        "schema:PropertyValue"
+      ],
+      "schema:name": "i2",
+      "cdif:uses": [
+        {
+          "@id": "xas:i2_Variable"
+        }
+      ],
+      "@id": "xas:i2_IV"
+    },
+    {
+      "@type": [
+        "cdi:InstanceVariable",
+        "schema:PropertyValue"
+      ],
+      "schema:name": "sum outputcounts",
+      "cdif:uses": [
+        {
+          "@id": "xas:sum_outputcounts_Variable"
+        }
+      ],
+      "@id": "xas:sum_outputcounts_IV"
+    },
+    {
+      "@type": [
+        "cdi:InstanceVariable",
+        "schema:PropertyValue"
+      ],
+      "schema:name": "outputcounts mcal",
+      "cdif:uses": [
+        {
+          "@id": "xas:outputcounts_mcal_Variable"
+        }
+      ],
+      "@id": "xas:outputcounts_mcal_IV"
+    },
+    {
+      "@type": [
+        "cdi:InstanceVariable",
+        "schema:PropertyValue"
+      ],
+      "schema:name": "outputcounts mca2",
+      "cdif:uses": [
+        {
+          "@id": "xas:outputcounts_mca2_Variable"
+        }
+      ],
+      "@id": "xas:outputcounts_mca2_IV"
+    }
+  ],
+  "schema:subjectOf": {
+    "@type": [
+      "schema:Dataset",
+      "dcat:CatalogRecord"
+    ],
+    "schema:additionalType": [
+      {
+        "@id": "dcat:CatalogRecord"
+      }
+    ],
+    "dcterms:conformsTo": [
+      {
+        "@id": "https://w3id.org/cdif/core/1.1"
+      },
+      {
+        "@id": "https://w3id.org/cdif/discovery/1.1"
+      },
+      {
+        "@id": "https://w3id.org/cdif/data_description/1.1"
+      },
+      {
+        "@id": "https://w3id.org/cdif/data_structure/1.1"
+      }
+    ],
+    "@id": "xas:fe_c3d.001_metadata",
+    "schema:about": {
+      "@id": "xas:fe_c3d.001"
+    }
+  },
+  "schema:dateModified": "2024-01-01",
+  "schema:license": [
+    {
+      "@id": "https://creativecommons.org/licenses/by/4.0/"
+    }
+  ]
+}
