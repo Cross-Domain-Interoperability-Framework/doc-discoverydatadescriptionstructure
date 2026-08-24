@@ -298,13 +298,31 @@
     "@id": "ex:dataset/vitalsLong/pk",
     "cdif:isComposedOf": [
       {
-        "@id": "ex:var/patientId"
+        "@type": [
+          "cdi:ComponentPosition"
+        ],
+        "cdi:indexes": {
+          "@id": "ex:var/patientId"
+        },
+        "cdi:value": 1
       },
       {
-        "@id": "ex:var/measureName"
+        "@type": [
+          "cdi:ComponentPosition"
+        ],
+        "cdi:indexes": {
+          "@id": "ex:var/measureName"
+        },
+        "cdi:value": 2
       },
       {
-        "@id": "ex:var/observedAt"
+        "@type": [
+          "cdi:ComponentPosition"
+        ],
+        "cdi:indexes": {
+          "@id": "ex:var/observedAt"
+        },
+        "cdi:value": 3
       }
     ]
   },
@@ -513,13 +531,31 @@
           "@id": "ex:struct/vitalsLong/pk",
           "cdif:isComposedOf": [
             {
-              "@id": "ex:var/patientId"
+              "@type": [
+                "cdi:ComponentPosition"
+              ],
+              "cdi:indexes": {
+                "@id": "ex:var/patientId"
+              },
+              "cdi:value": 1
             },
             {
-              "@id": "ex:var/measureName"
+              "@type": [
+                "cdi:ComponentPosition"
+              ],
+              "cdi:indexes": {
+                "@id": "ex:var/measureName"
+              },
+              "cdi:value": 2
             },
             {
-              "@id": "ex:var/observedAt"
+              "@type": [
+                "cdi:ComponentPosition"
+              ],
+              "cdi:indexes": {
+                "@id": "ex:var/observedAt"
+              },
+              "cdi:value": 3
             }
           ]
         }
