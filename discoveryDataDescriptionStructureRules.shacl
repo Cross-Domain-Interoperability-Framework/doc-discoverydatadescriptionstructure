@@ -225,6 +225,7 @@ cdifd:CDIFCatalogRecordShape a sh:NodeShape ;
     sh:message "The target of the metadata record (about)." ;
     sh:nodeKind sh:IRI ;
     sh:property cdifd:catalogRecordTypeProperty,
+        cdifd:metadataConformsToPresent,
         cdifd:metadataProfileProperty,
         cdifd:metadataSubjectProperty ;
     sh:target [ a sh:SPARQLTarget ;
@@ -1344,6 +1345,12 @@ cdifd:keywordsProperty a sh:PropertyShape ;
     sh:path schema:keywords ;
     sh:severity sh:Warning .
 
+cdifd:metadataConformsToPresent a sh:PropertyShape ;
+    sh:message "a catalog record must declare at least one dcterms:conformsTo IRI identifying the conventions its serialization follows" ;
+    sh:minCount 1 ;
+    sh:nodeKind sh:IRI ;
+    sh:path dcterms:conformsTo .
+
 cdifd:metadataProfileProperty a sh:PropertyShape ;
     sh:hasValue <https://w3id.org/cdif/core/1.1>,
         <https://w3id.org/cdif/data_description/1.1>,
@@ -1352,7 +1359,8 @@ cdifd:metadataProfileProperty a sh:PropertyShape ;
     sh:message "a CDIF DiscoveryDataDescriptionStructure metadata record must declare conformance to core/1.0, discovery/1.0, data_description/1.0 and data_structure/1.0 (all under https://w3id.org/cdif/)" ;
     sh:minCount 1 ;
     sh:nodeKind sh:IRI ;
-    sh:path dcterms:conformsTo .
+    sh:path dcterms:conformsTo ;
+    sh:severity sh:Warning .
 
 cdifd:metadataSubjectProperty a sh:PropertyShape ;
     sh:message "link to the target of the metadata node using the about property" ;
