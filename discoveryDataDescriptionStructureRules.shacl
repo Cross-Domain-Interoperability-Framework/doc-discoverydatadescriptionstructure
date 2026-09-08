@@ -87,7 +87,7 @@
                 ?this cdif:uses ?rv .
                 ?rv a cdi:RepresentedVariable .
                 ?ac a cdi:AttributeComponent .
-                ?ac cdif:isDefinedBy_RepresentedVariable ?rv .
+                ?ac cdif:isDefinedBy_Variable ?rv .
                 ?ac cdi:qualifies ?val .
             }""" ] .
 
@@ -167,18 +167,18 @@
     sh:targetClass schema:Dataset .
 
 <https://cdif.org/validation/0.1/data-structure/shacl#RepresentedVariableMustBeInstantiatedShape> a sh:NodeShape ;
-    sh:property [ sh:message "This RepresentedVariable is referenced by a DataStructureComponent (cdif:isDefinedBy_RepresentedVariable) but no InstanceVariable references it via cdif:uses. Add an InstanceVariable in schema:variableMeasured whose cdif:uses points at this RepresentedVariable." ;
-            sh:path [ sh:inversePath <https://w3id.org/cdif/uses> ] ;
-            sh:qualifiedMinCount 1 ;
-            sh:qualifiedValueShape [ sh:class cdi:InstanceVariable ] ;
-            sh:severity sh:Violation ] ;
-    sh:targetObjectsOf <https://w3id.org/cdif/isDefinedBy_RepresentedVariable> .
+    sh:message "This RepresentedVariable is referenced by a DataStructureComponent (cdif:isDefinedBy_Variable) but no InstanceVariable references it via cdif:uses. Add an InstanceVariable in schema:variableMeasured whose cdif:uses points at this RepresentedVariable, or point the component straight at the InstanceVariable." ;
+    sh:or ( [ sh:class cdi:InstanceVariable ] [ sh:property [ sh:path [ sh:inversePath <https://w3id.org/cdif/uses> ] ;
+                        sh:qualifiedMinCount 1 ;
+                        sh:qualifiedValueShape [ sh:class cdi:InstanceVariable ] ] ] ) ;
+    sh:severity sh:Violation ;
+    sh:targetObjectsOf <https://w3id.org/cdif/isDefinedBy_Variable> .
 
 <https://cdif.org/validation/0.1/data-structure/shacl#RepresentedVariableMustHaveStableIdShape> a sh:NodeShape ;
-    sh:message "A RepresentedVariable referenced by a DataStructureComponent (cdif:isDefinedBy_RepresentedVariable) must be identified by a stable @id (IRI), not an inline blank node, so that an InstanceVariable can reference it via cdif:uses." ;
+    sh:message "A RepresentedVariable referenced by a DataStructureComponent (cdif:isDefinedBy_Variable) must be identified by a stable @id (IRI), not an inline blank node, so that an InstanceVariable can reference it via cdif:uses." ;
     sh:nodeKind sh:IRI ;
     sh:severity sh:Violation ;
-    sh:targetObjectsOf <https://w3id.org/cdif/isDefinedBy_RepresentedVariable> .
+    sh:targetObjectsOf <https://w3id.org/cdif/isDefinedBy_Variable> .
 
 cdifd:CDIFActionShape a sh:NodeShape ;
     sh:property [ sh:class schema:EntryPoint ;
@@ -851,9 +851,9 @@ cdifd:cdifDescriptorVariableShape a sh:NodeShape ;
     sh:targetClass cdi:DescriptorVariable .
 
 cdifd:cdifDimensionComponentShape a sh:NodeShape ;
-    sh:property [ sh:message "A cdi:DimensionComponent must carry cdif:isDefinedBy_RepresentedVariable (the RepresentedVariable it is a role of)." ;
+    sh:property [ sh:message "A cdi:DimensionComponent must carry cdif:isDefinedBy_Variable (the RepresentedVariable or InstanceVariable it is a role of)." ;
             sh:minCount 1 ;
-            sh:path <https://w3id.org/cdif/isDefinedBy_RepresentedVariable> ;
+            sh:path <https://w3id.org/cdif/isDefinedBy_Variable> ;
             sh:severity sh:Violation ] ;
     sh:targetClass cdi:DimensionComponent .
 
@@ -876,9 +876,9 @@ cdifd:cdifEnumerationDomainShape a sh:NodeShape ;
     sh:targetClass <https://w3id.org/cdif/EnumerationDomain> .
 
 cdifd:cdifIdentifierComponentShape a sh:NodeShape ;
-    sh:property [ sh:message "A cdi:IdentifierComponent must carry cdif:isDefinedBy_RepresentedVariable (the RepresentedVariable it is a role of)." ;
+    sh:property [ sh:message "A cdi:IdentifierComponent must carry cdif:isDefinedBy_Variable (the RepresentedVariable or InstanceVariable it is a role of)." ;
             sh:minCount 1 ;
-            sh:path <https://w3id.org/cdif/isDefinedBy_RepresentedVariable> ;
+            sh:path <https://w3id.org/cdif/isDefinedBy_Variable> ;
             sh:severity sh:Violation ] ;
     sh:targetClass cdi:IdentifierComponent .
 
