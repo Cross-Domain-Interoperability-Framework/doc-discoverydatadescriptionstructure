@@ -58,7 +58,7 @@
   - [Data types added by CDIF Data Description profile](#data-types-added-by-cdif-data-description-profile)
   - [xsdDataType](#xsddatatype)
 - [DataDownload Properties added by the CDIF Data Structure Profile](#datadownload-properties-added-by-the-cdif-data-structure-profile)
-  - [schema:isStructuredBy](#schemaisstructuredby)
+  - [cdi:isStructuredBy](#cdiisstructuredby)
 - [Class Definitions](#class-definitions)
   - [5. Examples](#5-examples)
   - [6. Provenance of the artifacts](#6-provenance-of-the-artifacts)
@@ -333,7 +333,7 @@ The following table compared the properties and requirements for this schema.org
 - **Content:** string
 - **Description:** A descriptive name of a dataset (e.g., \'Snow depth in Northern Hemisphere\'). The name should uniquely identify the described resource for human use, in the scope of the metadata catalog containing this metadata record. Schema.org property, in namepace \'http://schema.org/\'.
 
-### @identifier
+### identifier
 
 - **Cardinality:** Required
 - **Content:** string.uri or [PropertyValue-(identifier)](#propertyvalue-identifier)
@@ -704,7 +704,7 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 - **Content:** string
 - **Description:** Label for person that is meaningful for human users, should format consistently. Recommend \'Family Name, Given Name\' format.
 
-### @identifier
+### identifier
 
 - **Cardinality:** Required if no name
 - **Content:** string.uri or [PropertyValue-(identifier)](#propertyvalue-identifier)
@@ -837,7 +837,7 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - **CHOICE (at least one of identifier, name, or funder**
 
-### @identifier
+### identifier
 
 - **Cardinality:** Required if no name or funder
 - **Content:** string.uri or [PropertyValue-(identifier)](#propertyvalue-identifier)
@@ -947,7 +947,7 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 - **Content:** string.url
 - **Description:** Url to access catalog landing page.
 
-### @identifier
+### identifier
 
 - **Cardinality:** Optional
 - **Content:** string.uri or [PropertyValue-(identifier)](#propertyvalue-identifier)
@@ -1064,7 +1064,7 @@ CHOICE. At least one of the following four is required
 - **Content:** [GeoCoordinates](#geocoordinates) or [GeoShape](#geoshape)
 - **Description:** Either a bounding box or a point location. Use WGS 84 latitude and longitude coordinates
 
-### geosparql:HasGeometry
+### geosparql:hasGeometry
 
 - **Cardinality:** Conditional
 - **Content:** [sf:SimpleFeature](#sfsimplefeature)
@@ -1222,7 +1222,7 @@ CHOICE. At least one of the following four is required
 - **Content:** integer (≥ 0)
 - **Description:** Non-negative integer that orders the fields in the data structure (column number, 0-based). Required for `cdi:TabularTextDataSet`; for `cdi:StructuredDataSet` use `cdif:locator` instead.
 
-### **cdif:locator**
+### **cdi:locator**
 
 - **Cardinality:** Optional
 - **Content:** string
@@ -1921,7 +1921,7 @@ For non-XSD intended data types (e.g. domain-specific types defined in a control
 
 [↑ Back to TOC](#table-of-contents)
 
-## schema:isStructuredBy
+## cdi:isStructuredBy
 
 [↑ Back to TOC](#table-of-contents)
 
