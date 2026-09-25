@@ -708,6 +708,7 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - **Cardinality:** Required if no name
 - **Content:** string.uri or [PropertyValue-(identifier)](#propertyvalue-identifier)
+- **Description:** identifier for person, recommend ORCID
 
 ### description
 
@@ -737,6 +738,7 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - **Cardinality:** Optional, Repeatable
 - **Content:** string, [object reference](#object-reference)
+- **Description:** other identifiers for the person
 
 ## Organization
 
@@ -764,6 +766,7 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - **Cardinality:** Required if no name
 - **Content:** string.uri or [PropertyValue-(identifier)](#propertyvalue-identifier)
+- **Description:** identifier for organization
 
 ### additionalType
 
@@ -785,6 +788,7 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - **Cardinality:** Optional, Repeatable
 - **Content:** string, [object reference](#object-reference)
+- **Description:** other identifiers for the organization
 
 ## ContactPoint
 
