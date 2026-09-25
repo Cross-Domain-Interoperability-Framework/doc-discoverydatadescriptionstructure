@@ -2418,6 +2418,7 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 
 - **Cardinality:** Optional
 - **Content:** one of: object reference or #/$defs/CdifRepresentedVariable
+- **Description:** definition of a container variable that holds values for the various properties defined by the descriptorVariable. The interpretation of values for this variable is determined by the values of the coupled descriptor variable in the same dataset record.
 
 ### cdi:semantic
 
