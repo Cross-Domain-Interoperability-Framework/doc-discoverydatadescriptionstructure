@@ -1980,10 +1980,10 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 - **Content:** [object reference](#/$defs/Identifier)
 - **Description:** Identifier for objects requiring short- or long-lasting referencing and management.
 
-### cdif:isDefinedBy_RepresentedVariable
+### cdif:isDefinedBy_Variable
 
 - **Cardinality:** Optional
-- **Content:** object reference to cdif:Represented Variable
+- **Content:** an inline cdi:RepresentedVariable, an inline cdi:InstanceVariable, or an object reference (@id) to either
 - **Description:** reference to the a represented variable that defines this component
 
 ### cdi:semantic
@@ -2076,10 +2076,10 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 - **Content:** string
 - **Description:** Identifier for this node
 
-### cdif:isDefinedBy_RepresentedVariable
+### cdif:isDefinedBy_Variable
 
 - **Cardinality:** Optional
-- **Content:** cdif:RepresentedVariable or object reference to cdif:Represented Variable
+- **Content:** an inline cdi:RepresentedVariable, an inline cdi:InstanceVariable, or an object reference (@id) to either
 
 ## cdif:RepresentedVariable
 
@@ -2308,10 +2308,10 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 - **Content:** string
 - **Description:** Identifier for this IdentifierComponent node
 
-### cdif:isDefinedBy_RepresentedVariable
+### cdif:isDefinedBy_Variable
 
 - **Cardinality:** Required
-- **Content:**  cdif:RepresentedVariable or object reference to cdif:Represented Variable
+- **Content:** an inline cdi:RepresentedVariable, an inline cdi:InstanceVariable, or an object reference (@id) to either
 
 ## MeasureComponent
 
@@ -2342,10 +2342,10 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 - **Content:** [object reference](#/$defs/Identifier)
 - **Description:** Identifier for objects requiring short- or long-lasting referencing and management.
 
-### cdif:isDefinedBy_RepresentedVariable
+### cdif:isDefinedBy_Variable
 
 - **Cardinality:** Optional
-- **Content:** cdif:RepresentedVariable or object reference to cdif:Represented Variable)
+- **Content:** an inline cdi:RepresentedVariable, an inline cdi:InstanceVariable, or an object reference (@id) to either
 
 ### cdi:semantic
 
@@ -2417,10 +2417,10 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 - **Content:** string
 - **Description:** Identifier for this node
 
-### cdif:isDefinedBy_RepresentedVariable
+### cdif:isDefinedBy_Variable
 
 - **Cardinality:** Optional
-- **Content:** one of: object reference or #/$defs/CdifRepresentedVariable
+- **Content:** an inline cdi:RepresentedVariable, an inline cdi:InstanceVariable, or an object reference (@id) to either
 - **Description:** definition of a container variable that holds values for the various properties defined by the descriptorVariable. The interpretation of values for this variable is determined by the values of the coupled descriptor variable in the same dataset record.
 
 ### cdi:semantic
