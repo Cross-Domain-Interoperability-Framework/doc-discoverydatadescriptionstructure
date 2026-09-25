@@ -2082,7 +2082,7 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 
 ### cdif:isDefinedBy_Variable
 
-- **Cardinality:** Optional
+- **Cardinality:** Required
 - **Content:** an inline cdi:RepresentedVariable, an inline cdi:InstanceVariable, or an object reference (@id) to either
 
 ## cdif:RepresentedVariable
