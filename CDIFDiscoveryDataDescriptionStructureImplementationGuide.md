@@ -73,7 +73,7 @@
   - [Identifier](#identifier)
   - [IdentifierComponent](#identifiercomponent)
   - [MeasureComponent](#measurecomponent)
-  - [PrimaryKey](#primarykey)
+  - [PrimaryKey](#primarykey) — see [cdif:Key](#cdifkey)
   - [VariableDescriptorComponent](#variabledescriptorcomponent)
   - [VariableValueComponent](#variablevaluecomponent)
 
@@ -525,7 +525,7 @@ The following table compared the properties and requirements for this schema.org
 
 - **Cardinality:** Optional, Repeatable
 - **Content:** [cdif:Key](#cdifkey)
-- **Description:** Primary key of the dataset: a `cdif:Key` whose `cdif:isComposedOf` is an ordered list of `cdi:ComponentPosition` wrappers. Each wrapper carries `cdi:indexes` (the `cdi:InstanceVariable` at that position, drawn from `schema:variableMeasured`, inline or `@id`-reference) and `cdi:value` (the integer position in the key, 0- or 1-based). Together the wrappers identify each data instance. Matches the canonical DDI-CDI PrimaryKey structure defined in `ddi-cdif-data-structure`.
+- **Description:** Primary key of the dataset: a `cdif:Key` whose `cdif:isComposedOf` is an ordered list of `cdi:ComponentPosition` wrappers. Each wrapper carries `cdi:indexes` (an `@id`-reference to the `cdi:InstanceVariable` at that position, drawn from `schema:variableMeasured`) and `cdi:value` (the 1-based integer position in the key, default `1`). Together the wrappers identify each data instance. Matches the canonical DDI-CDI PrimaryKey structure defined in `ddi-cdif-data-structure`.
 
 ### cdif:statistics
 
@@ -1412,7 +1412,7 @@ CHOICE. At least one of the following four is required
 
 - **Cardinality:** Required, Repeatable
 - **Content:** Array of [cdi:ComponentPosition](#cdicomponentposition) wrappers
-- **Description:** Ordered list of `cdi:ComponentPosition` wrappers, one per key component. Each wrapper holds `cdi:indexes` (the `cdi:InstanceVariable` at that position -- inline `cdifInstanceVariable` or `@id`-reference) and `cdi:value` (the integer position, 0- or 1-based).
+- **Description:** Ordered list of `cdi:ComponentPosition` wrappers, one per key component. Each wrapper holds `cdi:indexes` (an `@id`-reference to the `cdi:InstanceVariable` at that position -- an inline variable definition is **not** permitted) and `cdi:value` (the 1-based integer position, default `1`).
 
 ## cdif:StatisticsCollection
 
@@ -2004,11 +2004,11 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 
 - array of links to data structure components that link representedVariables to roles in the data structure. Values are one of **cdif:DimensionComponent**, **cdif:MeasureComponent**, or **cdif:AttributeComponent**
 
-### cdi:has_PrimaryKey
+### cdif:has_PrimaryKey
 
-- property that specifies variables in the structure that uniquely identify a unit in the population described. value: cdif:PrimaryKey or object reference to a cdif:PrimaryKey. 
+- property that specifies variables in the structure that uniquely identify a unit in the population described. value: a cdif:Key, or an object reference to one. 
 
-### cdi:has_ForeignKey
+### cdif:has_ForeignKey
 
 - specifies a variable with values that identify data records in a different dataset. value: cdif:ForeignKey or object reference to a cdif:ForeignKey. 
 
@@ -2026,11 +2026,11 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 
 - array of links to data structure components that link representedVariables to roles in the data structure. Values are one of **cdif:IdentifierComponent**, **cdif:VariableDescriptorComponent**, **cdif:VariableValueComponent**, or **cdif:AttributeComponent**
 
-### cdi:has_PrimaryKey
+### cdif:has_PrimaryKey
 
-- property that specifies variables in the structure that uniquely identify a unit in the population described. value: cdif:PrimaryKey or object reference to a cdif:PrimaryKey. 
+- property that specifies variables in the structure that uniquely identify a unit in the population described. value: a cdif:Key, or an object reference to one. 
 
-### cdi:has_ForeignKey
+### cdif:has_ForeignKey
 
 - specifies a variable with values that identify data records in a different dataset. value: cdif:ForeignKey or object reference to a cdif:ForeignKey. 
 
@@ -2048,11 +2048,11 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 
 - array of links to data structure components that link representedVariables to roles in the data structure. Values are one of **cdif:IdentifierComponent**, **cdif:MeasureComponent**, or **cdif:AttributeComponent**
 
-### cdi:has_PrimaryKey
+### cdif:has_PrimaryKey
 
-- property that specifies variables in the structure that uniquely identify a unit in the population described. value: cdif:PrimaryKey or object reference to a cdif:PrimaryKey. 
+- property that specifies variables in the structure that uniquely identify a unit in the population described. value: a cdif:Key, or an object reference to one. 
 
-### cdi:has_ForeignKey
+### cdif:has_ForeignKey
 
 - specifies a variable with values that identify data records in a different dataset. value: cdif:ForeignKey or object reference to a cdif:ForeignKey. 
 
@@ -2354,22 +2354,8 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 
 [↑ Back to TOC](#table-of-contents)
 
--set of Variables that uniquely identify a data instance. Array order of cdif:isComposedOf items is the cdif:position; no intermediate ComponentPosition wrapper.
-
-### @type
-
-- **Cardinality:** Required
-- **Content:** array of strings, contains 'cdif:PrimaryKey'
-
-### @id
-
-- **Cardinality:** Optional
-- **Content:** string
-- **Description:** Identifier for this PrimaryKey node
-
-### cdif:isComposedOf
-
-- array of objects that include a reference to a cdif:RepresentedVariable in the datastructure and a cdif:position property with an integer value that orders the variable in an order key structure.
+- **There is no separate `cdif:PrimaryKey` class.** `cdif:has_PrimaryKey` on a data structure takes the same [cdif:Key](#cdifkey) that `cdif:hasPrimaryKey` takes at dataset level, so a structure-level key and a dataset-level key can be one node referenced from both. See [cdif:Key](#cdifkey) for the properties.
+- Note in particular that position is **explicit**, in `cdi:value` on a `cdi:ComponentPosition` wrapper. Earlier revisions of this guide described array order as the position and a `cdif:position` property on the item; neither was ever what the schema required.
 
 ## VariableDescriptorComponent
 
