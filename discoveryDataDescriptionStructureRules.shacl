@@ -31,7 +31,7 @@
 
 <https://cdif.org/validation/0.1/data-structure/shacl#NoDuplicateDescribedUnitOfMeasureShape> a sh:NodeShape ;
     sh:property [ sh:maxCount 0 ;
-            sh:message "cdi:describedUnitOfMeasure is already defined on the RepresentedVariable that this InstanceVariable cdif:uses; remove the duplicate from the InstanceVariable." ;
+            sh:message "cdi:describedUnitOfMeasure is already defined on the RepresentedVariable that this InstanceVariable cdif:isDefinedBy_RepresentedVariable; remove the duplicate from the InstanceVariable." ;
             sh:path cdi:describedUnitOfMeasure ;
             sh:severity sh:Violation ] ;
     sh:target [ a sh:SPARQLTarget ;
@@ -44,14 +44,14 @@
             SELECT DISTINCT ?this
             WHERE {
                 ?this a cdi:InstanceVariable .
-                ?this cdif:uses ?rv .
+                ?this cdif:isDefinedBy_RepresentedVariable ?rv .
                 ?rv a cdi:RepresentedVariable .
                 ?rv cdi:describedUnitOfMeasure ?val .
             }""" ] .
 
 <https://cdif.org/validation/0.1/data-structure/shacl#NoDuplicateHasIntendedDataTypeShape> a sh:NodeShape ;
     sh:property [ sh:maxCount 0 ;
-            sh:message "cdi:hasIntendedDataType is already defined on the RepresentedVariable that this InstanceVariable cdif:uses; remove the duplicate from the InstanceVariable." ;
+            sh:message "cdi:hasIntendedDataType is already defined on the RepresentedVariable that this InstanceVariable cdif:isDefinedBy_RepresentedVariable; remove the duplicate from the InstanceVariable." ;
             sh:path cdi:hasIntendedDataType ;
             sh:severity sh:Violation ] ;
     sh:target [ a sh:SPARQLTarget ;
@@ -64,14 +64,14 @@
             SELECT DISTINCT ?this
             WHERE {
                 ?this a cdi:InstanceVariable .
-                ?this cdif:uses ?rv .
+                ?this cdif:isDefinedBy_RepresentedVariable ?rv .
                 ?rv a cdi:RepresentedVariable .
                 ?rv cdi:hasIntendedDataType ?val .
             }""" ] .
 
 <https://cdif.org/validation/0.1/data-structure/shacl#NoDuplicateQualifiesShape> a sh:NodeShape ;
     sh:property [ sh:maxCount 0 ;
-            sh:message "cdi:qualifies is already defined on the AttributeComponent that wraps the RepresentedVariable this InstanceVariable cdif:uses; remove the duplicate from the InstanceVariable." ;
+            sh:message "cdi:qualifies is already defined on the AttributeComponent that wraps the RepresentedVariable this InstanceVariable cdif:isDefinedBy_RepresentedVariable; remove the duplicate from the InstanceVariable." ;
             sh:path cdi:qualifies ;
             sh:severity sh:Violation ] ;
     sh:target [ a sh:SPARQLTarget ;
@@ -84,7 +84,7 @@
             SELECT DISTINCT ?this
             WHERE {
                 ?this a cdi:InstanceVariable .
-                ?this cdif:uses ?rv .
+                ?this cdif:isDefinedBy_RepresentedVariable ?rv .
                 ?rv a cdi:RepresentedVariable .
                 ?ac a cdi:AttributeComponent .
                 ?ac cdif:isDefinedBy_Variable ?rv .
@@ -93,7 +93,7 @@
 
 <https://cdif.org/validation/0.1/data-structure/shacl#NoDuplicateSimpleUnitOfMeasureShape> a sh:NodeShape ;
     sh:property [ sh:maxCount 0 ;
-            sh:message "A simple unit of measure is already defined on the RepresentedVariable that this InstanceVariable cdif:uses; remove the duplicate cdif:simpleUnitOfMeasure from the InstanceVariable." ;
+            sh:message "A simple unit of measure is already defined on the RepresentedVariable that this InstanceVariable cdif:isDefinedBy_RepresentedVariable; remove the duplicate cdif:simpleUnitOfMeasure from the InstanceVariable." ;
             sh:path <https://w3id.org/cdif/simpleUnitOfMeasure> ;
             sh:severity sh:Violation ] ;
     sh:target [ a sh:SPARQLTarget ;
@@ -106,14 +106,14 @@
             SELECT DISTINCT ?this
             WHERE {
                 ?this a cdi:InstanceVariable .
-                ?this cdif:uses ?rv .
+                ?this cdif:isDefinedBy_RepresentedVariable ?rv .
                 ?rv a cdi:RepresentedVariable .
                 { ?rv cdi:simpleUnitOfMeasure ?val } UNION { ?rv cdif:simpleUnitOfMeasure ?val }
             }""" ] .
 
 <https://cdif.org/validation/0.1/data-structure/shacl#NoDuplicateTakesSentinelValuesFromShape> a sh:NodeShape ;
     sh:property [ sh:maxCount 0 ;
-            sh:message "cdi:takesSentinelValuesFrom is already defined on the RepresentedVariable that this InstanceVariable cdif:uses; remove the duplicate from the InstanceVariable." ;
+            sh:message "cdi:takesSentinelValuesFrom is already defined on the RepresentedVariable that this InstanceVariable cdif:isDefinedBy_RepresentedVariable; remove the duplicate from the InstanceVariable." ;
             sh:path cdi:takesSentinelValuesFrom ;
             sh:severity sh:Violation ] ;
     sh:target [ a sh:SPARQLTarget ;
@@ -126,14 +126,14 @@
             SELECT DISTINCT ?this
             WHERE {
                 ?this a cdi:InstanceVariable .
-                ?this cdif:uses ?rv .
+                ?this cdif:isDefinedBy_RepresentedVariable ?rv .
                 ?rv a cdi:RepresentedVariable .
                 ?rv cdi:takesSentinelValuesFrom ?val .
             }""" ] .
 
 <https://cdif.org/validation/0.1/data-structure/shacl#NoDuplicateTakesSubstantiveValuesFromShape> a sh:NodeShape ;
     sh:property [ sh:maxCount 0 ;
-            sh:message "cdi:takesSubstantiveValuesFrom is already defined on the RepresentedVariable that this InstanceVariable cdif:uses; remove the duplicate from the InstanceVariable." ;
+            sh:message "cdi:takesSubstantiveValuesFrom is already defined on the RepresentedVariable that this InstanceVariable cdif:isDefinedBy_RepresentedVariable; remove the duplicate from the InstanceVariable." ;
             sh:path cdi:takesSubstantiveValuesFrom ;
             sh:severity sh:Violation ] ;
     sh:target [ a sh:SPARQLTarget ;
@@ -146,13 +146,13 @@
             SELECT DISTINCT ?this
             WHERE {
                 ?this a cdi:InstanceVariable .
-                ?this cdif:uses ?rv .
+                ?this cdif:isDefinedBy_RepresentedVariable ?rv .
                 ?rv a cdi:RepresentedVariable .
                 ?rv cdi:takesSubstantiveValuesFrom ?val .
             }""" ] .
 
 <https://cdif.org/validation/0.1/data-structure/shacl#ReferencedStructureImpliesReferencedRVShape> a sh:NodeShape ;
-    sh:sparql [ sh:message "This dataset references an external data structure (cdi:isStructuredBy is a bare @id reference), so its RepresentedVariables belong to that external structure: an InstanceVariable's cdif:uses must be an @id reference, not an inline cdi:RepresentedVariable." ;
+    sh:sparql [ sh:message "This dataset references an external data structure (cdi:isStructuredBy is a bare @id reference), so its RepresentedVariables belong to that external structure: an InstanceVariable's cdif:isDefinedBy_RepresentedVariable must be an @id reference, not an inline cdi:RepresentedVariable." ;
             sh:select """
             SELECT $this WHERE {
                 $this <http://schema.org/distribution> ?dist .
@@ -167,15 +167,15 @@
     sh:targetClass schema:Dataset .
 
 <https://cdif.org/validation/0.1/data-structure/shacl#RepresentedVariableMustBeInstantiatedShape> a sh:NodeShape ;
-    sh:message "This RepresentedVariable is referenced by a DataStructureComponent (cdif:isDefinedBy_Variable) but no InstanceVariable references it via cdif:uses. Add an InstanceVariable in schema:variableMeasured whose cdif:uses points at this RepresentedVariable, or point the component straight at the InstanceVariable." ;
-    sh:or ( [ sh:class cdi:InstanceVariable ] [ sh:property [ sh:path [ sh:inversePath <https://w3id.org/cdif/uses> ] ;
+    sh:message "This RepresentedVariable is referenced by a DataStructureComponent (cdif:isDefinedBy_Variable) but no InstanceVariable references it via cdif:isDefinedBy_RepresentedVariable. Add an InstanceVariable in schema:variableMeasured whose cdif:isDefinedBy_RepresentedVariable points at this RepresentedVariable, or point the component straight at the InstanceVariable." ;
+    sh:or ( [ sh:class cdi:InstanceVariable ] [ sh:property [ sh:path [ sh:inversePath <https://w3id.org/cdif/isDefinedBy_RepresentedVariable> ] ;
                         sh:qualifiedMinCount 1 ;
                         sh:qualifiedValueShape [ sh:class cdi:InstanceVariable ] ] ] ) ;
     sh:severity sh:Violation ;
     sh:targetObjectsOf <https://w3id.org/cdif/isDefinedBy_Variable> .
 
 <https://cdif.org/validation/0.1/data-structure/shacl#RepresentedVariableMustHaveStableIdShape> a sh:NodeShape ;
-    sh:message "A RepresentedVariable referenced by a DataStructureComponent (cdif:isDefinedBy_Variable) must be identified by a stable @id (IRI), not an inline blank node, so that an InstanceVariable can reference it via cdif:uses." ;
+    sh:message "A RepresentedVariable referenced by a DataStructureComponent (cdif:isDefinedBy_Variable) must be identified by a stable @id (IRI), not an inline blank node, so that an InstanceVariable can reference it via cdif:isDefinedBy_RepresentedVariable." ;
     sh:nodeKind sh:IRI ;
     sh:severity sh:Violation ;
     sh:targetObjectsOf <https://w3id.org/cdif/isDefinedBy_Variable> .

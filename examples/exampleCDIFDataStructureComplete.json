@@ -242,11 +242,9 @@
       ],
       "schema:name": "patient_id",
       "cdif:physicalDataType": "xsd:string",
-      "cdif:uses": [
-        {
-          "@id": "ex:struct/vitalsLong/rv/patientId"
-        }
-      ]
+      "cdif:isDefinedBy_RepresentedVariable": {
+        "@id": "ex:struct/vitalsLong/rv/patientId"
+      }
     },
     {
       "@id": "ex:var/measureName",
@@ -255,12 +253,7 @@
         "cdi:InstanceVariable"
       ],
       "schema:name": "measure_name",
-      "cdif:physicalDataType": "xsd:string",
-      "cdif:uses": [
-        {
-          "@id": "ex:struct/vitalsLong/dv/measureName"
-        }
-      ]
+      "cdif:physicalDataType": "xsd:string"
     },
     {
       "@id": "ex:var/measureValue",
@@ -270,11 +263,9 @@
       ],
       "schema:name": "measure_value",
       "cdif:physicalDataType": "xsd:decimal",
-      "cdif:uses": [
-        {
-          "@id": "ex:struct/vitalsLong/rv/measureValue"
-        }
-      ]
+      "cdif:isDefinedBy_RepresentedVariable": {
+        "@id": "ex:struct/vitalsLong/rv/measureValue"
+      }
     },
     {
       "@id": "ex:var/observedAt",
@@ -284,11 +275,9 @@
       ],
       "schema:name": "observed_at",
       "cdif:physicalDataType": "xsd:dateTime",
-      "cdif:uses": [
-        {
-          "@id": "ex:struct/vitalsLong/rv/observedAt"
-        }
-      ]
+      "cdif:isDefinedBy_RepresentedVariable": {
+        "@id": "ex:struct/vitalsLong/rv/observedAt"
+      }
     }
   ],
   "cdif:hasPrimaryKey": {

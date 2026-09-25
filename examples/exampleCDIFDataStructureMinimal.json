@@ -26,11 +26,9 @@
         "cdi:InstanceVariable"
       ],
       "schema:name": "patient_id",
-      "cdif:uses": [
-        {
-          "@id": "ex:struct/vitalsWide/rv/patientId"
-        }
-      ]
+      "cdif:isDefinedBy_RepresentedVariable": {
+        "@id": "ex:struct/vitalsWide/rv/patientId"
+      }
     },
     {
       "@id": "ex:var/systolicBP",
@@ -39,11 +37,9 @@
         "cdi:InstanceVariable"
       ],
       "schema:name": "systolic_bp",
-      "cdif:uses": [
-        {
-          "@id": "ex:struct/vitalsWide/rv/systolicBP"
-        }
-      ]
+      "cdif:isDefinedBy_RepresentedVariable": {
+        "@id": "ex:struct/vitalsWide/rv/systolicBP"
+      }
     }
   ],
   "schema:distribution": [
