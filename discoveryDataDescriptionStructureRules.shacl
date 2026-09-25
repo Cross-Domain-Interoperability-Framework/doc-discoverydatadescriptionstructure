@@ -870,13 +870,6 @@ cdifd:cdifDataStructure_LongDataStructureShape a sh:NodeShape ;
             sh:severity sh:Violation ] ;
     sh:targetClass cdi:LongDataStructure .
 
-cdifd:cdifDataStructure_PrimaryKeyShape a sh:NodeShape ;
-    sh:property [ sh:message "A cdif:PrimaryKey must carry at least one cdif:isComposedOf entry." ;
-            sh:minCount 1 ;
-            sh:path <https://w3id.org/cdif/isComposedOf> ;
-            sh:severity sh:Violation ] ;
-    sh:targetClass <https://w3id.org/cdif/PrimaryKey> .
-
 cdifd:cdifDataStructure_WideDataStructureShape a sh:NodeShape ;
     sh:property [ sh:message "A cdi:WideDataStructure must carry at least one cdi:has_DataStructureComponent." ;
             sh:minCount 1 ;
@@ -934,7 +927,7 @@ cdifd:cdifIdentifierComponentShape a sh:NodeShape ;
     sh:targetClass cdi:IdentifierComponent .
 
 cdifd:cdifKeyShape a sh:NodeShape ;
-    sh:property [ sh:message "A cdif:Key must have at least one cdif:isComposedOf entry (a cdi:InstanceVariable inline or @id-reference)." ;
+    sh:property [ sh:message "A cdif:Key must have at least one cdif:isComposedOf entry (an @id-reference to a cdi:InstanceVariable)." ;
             sh:minCount 1 ;
             sh:path <https://w3id.org/cdif/isComposedOf> ;
             sh:severity sh:Violation ] ;
