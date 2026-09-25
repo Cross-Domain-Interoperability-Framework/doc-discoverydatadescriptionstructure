@@ -1972,6 +1972,7 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 
 - **Cardinality:** Optional
 - **Content:** array of one of: object, [object reference](#/$defs/CdifDataStructureComponent_id-reference)
+- **Description:** link to the variable that this attribute applies to. 
 
 ### cdi:identifier
 
@@ -1982,7 +1983,8 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 ### cdif:isDefinedBy_RepresentedVariable
 
 - **Cardinality:** Optional
-- **Content:** cdif:RepresentedVariable or object reference to cdif:Represented Variable
+- **Content:** object reference to cdif:Represented Variable
+- **Description:** reference to the a represented variable that defines this component
 
 ### cdi:semantic
 
@@ -2002,7 +2004,8 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 
 ### cdi:has_DataStructureComponent
 
-- array of links to data structure components that link representedVariables to roles in the data structure. Values are one of **cdif:DimensionComponent**, **cdif:MeasureComponent**, or **cdif:AttributeComponent**
+- **Cardinality:** Optional
+- **Content:** array of links to data structure components that link representedVariables to roles in the data structure. Values are one of **cdif:DimensionComponent**, **cdif:MeasureComponent**, or **cdif:AttributeComponent**
 
 ### cdif:has_PrimaryKey
 
