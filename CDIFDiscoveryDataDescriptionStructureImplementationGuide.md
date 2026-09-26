@@ -888,6 +888,7 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 ### additionalType
 
 - **Cardinality:** Required -- \"dcat:CatalogRecord\", Repeatable
+- **Description:** The subjectOf/Dataset with information about the metadata record must have an additional type `dcat:CatalogRecord` declared, to distinguish it from other possible schema:subjectOf or schema:Dataset instances.
 - **Content:** string
 
 ### about
@@ -1228,13 +1229,13 @@ CHOICE. At least one of the following four is required
 
 ### **cdif:index**
 
-- **Cardinality:** Optional (required for tabular text)
+- **Cardinality:** Required if `@type` is `cdif:TextMapping` for a `cdi:TabularTextDataSet`
 - **Content:** integer (≥ 0)
 - **Description:** Non-negative integer that orders the fields in the data structure (column number, 0-based). Required for `cdi:TabularTextDataSet`; for `cdi:StructuredDataSet` use `cdif:locator` instead.
 
 ### **cdi:locator**
 
-- **Cardinality:** Optional
+- **Cardinality:** Required if `@type` is `cdif:LocatorMapping` for a `cdi:StructuredDataSet`
 - **Content:** string
 - **Description:** Path to the field inside a structured (hierarchical) physical container — for example a NetCDF/HDF5 group path like `/measurements/intensity`, a JSON Pointer, or a Zarr array path. Used in place of `cdif:index` for `cdi:StructuredDataSet` distributions where column-order positioning does not apply.
 
@@ -1329,9 +1330,9 @@ CHOICE. At least one of the following four is required
 
 ### **cdif:recommendedDataType**
 
-- **Cardinality:** Optional, Repeatable
+- **Cardinality:** Choice-at least one of cdif:recommendedDataType, cdif:takesValuesFrom is required
 - **Content:** [xsdDataType](#xsddatatype)
-- **Description:** One or more XSD data type tokens recommended for values from this domain. Required if `cdif:takesValuesFrom` is not provided; the SubstantiveValueDomain node MUST carry at least one of `cdif:takesValuesFrom` or `cdif:recommendedDataType`.
+- **Description:** One or more XSD data type tokens recommended for values from this domain. Required if `cdif:takesValuesFrom` is not provided; a SubstantiveValueDomain node MUST carry at least one of `cdif:takesValuesFrom` or `cdif:recommendedDataType`.
 
 ## cdif:SentinelValueDomain
 
@@ -1363,9 +1364,9 @@ CHOICE. At least one of the following four is required
 
 ### **cdif:recommendedDataType**
 
-- **Cardinality:** Optional, Repeatable
+- **Cardinality:** Choice-at least one of cdif:recommendedDataType, cdif:takesValuesFrom is required
 - **Content:** [xsdDataType](#xsddatatype)
-- **Description:** Same semantics as on `cdif:SubstantiveValueDomain`. At least one of `cdif:takesValuesFrom` or `cdif:recommendedDataType` MUST be present.
+- **Description:** One or more XSD data type tokens recommended for values from this domain. Required if `cdif:takesValuesFrom` is not provided; a SubstantiveValueDomain node MUST carry at least one of `cdif:takesValuesFrom` or `cdif:recommendedDataType`.
 
 ## cdif:EnumerationDomain
 
@@ -1711,7 +1712,7 @@ CHOICE. At least one of the following four is required
 
 - **Cardinality:** Optional
 - **Content:** string**,** MIME TYPE**
-- **Description:** **
+- **Description:** MIME type / media type identifier for the representation of a linked object.
 
 ### name
 
@@ -1817,13 +1818,13 @@ Choice:
 
 ### time:intervalStartedBy
 
-- **Cardinality:** Optional
+- **Cardinality:** Choice-at least one of time:intervalFinishedBy, time:intervalStartedBy is required
 - **Content:** string or [DefinedTerm](#defined-term)
 - **Description:** identifier for a named time ordinal era that is older bound of time interval, e.g. \'isc:LowerDevonian\'
 
 ### time:intervalFinishedBy
 
-- **Cardinality:** Optional
+- **Cardinality:** Choice-at least one of time:intervalFinishedBy, time:intervalStartedBy is required
 - **Content:** string or [DefinedTerm](#defined-term)
 - **Description:** identifier for a named time ordinal era that is younger bound of time interval, e.g. \'isc:LowerDevonian\'
 
@@ -1831,13 +1832,13 @@ OR:
 
 ### time:hasBeginning
 
-- **Cardinality:** Optional
+- **Cardinality:** Choice-at least one of time:hasBeginning, time:hasEnd is required
 - **Content:** [time:TimePosition](#timetimeposition)
 - **Description:** Temporal position for the beginning (older bound) of the interval, located by a numeric value in a temporal reference system
 
 ### time:hasEnd
 
-- **Cardinality:** Optional
+- **Cardinality:** Choice-at least one of time:hasBeginning, time:hasEnd is required
 - **Content:** [time:TimePosition](#timetimeposition)
 - **Description:** Temporal position for the end (younger bound) of the interval, located by a numeric value in a temporal reference system
 
@@ -2173,12 +2174,6 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 - **Content:** array of string
 - **Description:** A human-readable display label for the object. Supports the use of multiple languages. Repeat for labels with different content, for example, labels with differing length limitations.
 
-### cdi:externalDefinition
-
-- **Cardinality:** Optional
-- **Content:** object
-- **Description:** A reference to an external definition of a concept (that is, a concept which is described outside the content of the DDI-CDI metadata description). An example is a SKOS concept. The definition property is assumed to duplicate the external one referenced if externalDefinition is used. Other corresponding properties are assumed to be included unchanged if used.
-
 ### cdi:identifier
 
 - **Cardinality:** Optional
@@ -2196,10 +2191,6 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 - **Cardinality:** Optional
 - **Content:** array of one of: object, [object reference](#/$defs/CdifRepresentedVariable_id-reference)
 - **Description:** specifies the concept(s) that this variable expresses or aligns with.
-
-### id-reference
-
-- Reference to a node defined elsewhere in the document via its @id.
 
 ### @id
 
