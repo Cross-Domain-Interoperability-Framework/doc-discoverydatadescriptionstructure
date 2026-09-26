@@ -772,6 +772,7 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - **Cardinality:** Optional, Repeatable
 - **Content:** string or [DefinedTerm](#defined-term)
+- **Description:** other type names or identifiers to classify an organization in more detail
 
 ### alternateName
 
@@ -783,6 +784,7 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - **Cardinality:** Optional
 - **Content:** string
+- **Description:** Free text description providing additional information about an organization
 
 ### sameAs
 
@@ -829,6 +831,7 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - **Cardinality:** Required
 - **Content:** [object reference](#object-reference), [Person](#person) or [Organization](#organization)
+- **Description:** a person or organization that has contributed in some way to the creation, publication or maintenance of the described resource; optionally with an assigned role.
 
 ## MonetaryGrant
 
@@ -857,6 +860,7 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - **Cardinality:** Required if no identifier or name
 - **Content:** [object reference](#object-reference), [Person](#person), or [Organization](#organization)
+- **Description:** the person or organization that sponsors or grants the acknowledged funding.
 
 ### description
 
@@ -1061,6 +1065,7 @@ CHOICE. At least one of the following four is required
 
 - **Cardinality:** Conditional
 - **Content:** string.uri or [PropertyValue-(identifier)](#propertyvalue-identifier)
+- **Description:** a string or PropertyValue object that specifies an identifier, ideally a resolvable URI for the place that is the subject of the described resource.
 
 ### geo
 
@@ -1099,6 +1104,7 @@ CHOICE. At least one of the following four is required
 
 - **Cardinality:** Required if no name or termCode
 - **Content:** string.uri or [PropertyValue-(identifier)](#propertyvalue-identifier)
+- **Description:** an identifier string or PropertyValue object specifying the identifier for a term
 
 ### termCode
 
@@ -1353,6 +1359,7 @@ CHOICE. At least one of the following four is required
 
 - **Cardinality:** Optional
 - **Content:** string
+- **Description:** a label to identifier the value domain in user interfaces
 
 ### **cdif:recommendedDataType**
 
@@ -1867,11 +1874,13 @@ OR:
 
 - **Cardinality:** Required
 - **Content:** string, [object reference](#object-reference), or [DefinedTerm](#defined-term)
+- **Description:** specifies the quality measure type whose value is specified in this QualityMeasurement
 
 ### dqv:value
 
 - **Cardinality:** Required
 - **Content:** string or [DefinedTerm](#defined-term)
+- **Description:** specifies the value of the measure specified
 
 ## PropertyValueSpecification
 
@@ -2010,6 +2019,7 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 
 - **Cardinality:** Optional
 - **Content:** array of links to data structure components that link representedVariables to roles in the data structure. Values are one of **cdif:DimensionComponent**, **cdif:MeasureComponent**, or **cdif:AttributeComponent**
+- **Description:** a list of data structure component object that associate variable with their roles in the data structure
 
 ### cdif:has_PrimaryKey
 
@@ -2084,6 +2094,7 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 
 - **Cardinality:** Required
 - **Content:** an inline cdi:RepresentedVariable, an inline cdi:InstanceVariable, or an object reference (@id) to either
+- **Description:** link (object reference) to variable that contains values for the data structure component
 
 ## cdif:RepresentedVariable
 
@@ -2142,6 +2153,7 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 
 - **Cardinality:** Optional
 - **Content:** one of: object, [object reference](#/$defs/CdifRepresentedVariable_id-reference)
+- **Description:** a unitType object or link (object reference) that specifies the kind of thing that is the subject of the variable values
 
 ### cdi:unitOfMeasureKind
 
@@ -2183,6 +2195,7 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 
 - **Cardinality:** Optional
 - **Content:** array of one of: object, [object reference](#/$defs/CdifRepresentedVariable_id-reference)
+- **Description:** a string, Concept, definedTerm, or link (object references) that specifies the conceptual variable that defines the variables meaning or intention.
 
 ### id-reference
 
@@ -2316,6 +2329,7 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 
 - **Cardinality:** Required
 - **Content:** an inline cdi:RepresentedVariable, an inline cdi:InstanceVariable, or an object reference (@id) to either
+- **Description:** a link (object reference) to the variable that contains values for this component
 
 ## MeasureComponent
 
@@ -2350,6 +2364,7 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 
 - **Cardinality:** Optional
 - **Content:** an inline cdi:RepresentedVariable, an inline cdi:InstanceVariable, or an object reference (@id) to either
+- **Description:** a link (object reference) to the variable that contains values for this component
 
 ### cdi:semantic
 
@@ -2391,6 +2406,7 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 
 - **Cardinality:** Optional
 - **Content:** [object reference](#/$defs/CdifDataStructureComponent_id-reference)
+- **Description:** link (object reference) to the variable that contains values for the descriptor.
 
 ### cdi:identifier
 
