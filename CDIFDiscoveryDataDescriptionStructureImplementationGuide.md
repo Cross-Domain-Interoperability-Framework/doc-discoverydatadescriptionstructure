@@ -661,7 +661,7 @@ The following table compared the properties and requirements for this schema.org
 
 - **Cardinality:** Optional
 - **Content:** an action result object (the `actionResult` building block) -- typed `schema:DataDownload` but, unlike a file distribution, with **no** `schema:contentUrl` or `schema:contentSize` (the response is generated per request). It carries `schema:name`, `schema:description`, `schema:encodingFormat`, `dcterms:conformsTo`. It may optionally additionally be typed `cdi:PhysicalDataSet` (or a subclass `cdi:TabularTextDataSet` / `cdi:StructuredDataSet`).
-- **Description:** specifies the serialization scheme (encoding format, information model) for the expected representation of the API response. The result describes the *bytes* the service produces; the WebAPI distribution itself describes the *service*. At the Data Description level, when the result is additionally typed `cdi:PhysicalDataSet`, it may carry the physical-realization properties:
+- **Description:** specifies the serialization scheme (encoding format, information model) for the expected representation of the API response. The result describes the *bytes* the service produces; the WebAPI distribution itself describes the *service*. At the Data Description level, when the result is additionally typed `cdi:PhysicalDataSet`, it may carry the physical-realization properties.
 
 - `cdi:characterSet` — character encoding of the response
 - `cdif:hasPhysicalMapping` — see [CdifPhysicalMapping](#cdifphysicalmapping). The `cdif:formats_InstanceVariable` references inside each mapping point at `@id`s in the parent Dataset's `schema:variableMeasured` (the API response is another physical realization of those same InstanceVariables; do not redeclare the variables on the result).
@@ -2195,7 +2195,7 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 
 - **Cardinality:** Optional
 - **Content:** array of one of: object, [object reference](#/$defs/CdifRepresentedVariable_id-reference)
-- **Description:** a string, Concept, definedTerm, or link (object references) that specifies the conceptual variable that defines the variables meaning or intention.
+- **Description:** specifies the concept(s) that this variable expresses or aligns with.
 
 ### id-reference
 
