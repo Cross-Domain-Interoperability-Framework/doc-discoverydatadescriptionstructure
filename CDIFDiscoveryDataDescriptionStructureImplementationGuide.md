@@ -2347,7 +2347,7 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 
 - **Cardinality:** Optional
 - **Content:** array of string
-- **Description:** Human understandable name (liguistic signifier, word, phrase, or mnemonic). May follow ISO/IEC 11179-5 naming principles, and have context provided to specify usage.
+- **Description:** Human understandable name (linguistic signifier, word, phrase, or mnemonic). May follow ISO/IEC 11179-5 naming principles, and have context provided to specify usage.
 
 ### cdi:identifier
 
