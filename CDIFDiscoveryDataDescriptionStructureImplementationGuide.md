@@ -1173,31 +1173,31 @@ CHOICE. At least one of the following four is required
 - **Content:** [cdif:StatisticsCollection](#cdifstatisticscollection) or [object reference](#object-reference)
 - **Description:** The StatisticsCollection holding summary / category statistics for this InstanceVariable (InstanceVariable.isDescribedBy). `cdif:` namespaced and target-suffixed because the DDI-CDI `isDescribedBy` association is polymorphic.
 
-### **cdi:function**
+### **cdif:function**
 
 - **Cardinality:** Optional, Repeatable
 - **Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
 - **Description:** Immutable characteristic of the variable such as geographic designator, weight, temporal designation, etc. (InstanceVariable.function).
 
-### **cdi:platformType**
+### **cdif:platformType**
 
 - **Cardinality:** Optional
 - **Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
 - **Description:** The application or technical system context in which the variable has been realized -- typically a statistical processing package or processing environment (InstanceVariable.platformType).
 
-### **cdi:source**
+### **cdif:source**
 
 - **Cardinality:** Optional
 - **Content:** [object reference](#object-reference) or string
 - **Description:** Reference capturing provenance information for this InstanceVariable (InstanceVariable.source).
 
-### **cdi:hasIntendedDataType**
+### **cdif:hasIntendedDataType**
 
 - **Cardinality:** Optional
 - **Content:** [xsdDataType](#xsddatatype), [DefinedTerm](#defined-term), or [skos:Concept](#skosconcept)
 - **Description:** The physical datatype intended to be used for values of this variable. Supports the optional use of an external controlled vocabulary.Recommended values are XML Schema datatypes; see [xsdDataType](#xsddatatype)
 
-### **cdi:describedUnitOfMeasure**
+### **cdif:describedUnitOfMeasure**
 
 - **Cardinality:** Optional
 - **Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
@@ -1215,7 +1215,7 @@ CHOICE. At least one of the following four is required
 - **Content:** [cdif:SubstantiveValueDomain](#cdifsubstantivevaluedomain) inline, or [object reference](#object-reference) (`@id` only)
 - **Description:** Specifies the set of substantive values for this variable - the set of valid, meaningful values
 
-### **cdi:qualifies**
+### **cdif:qualifies**
 
 - **Cardinality:** Optional
 - **Content:** [object reference](#object-reference)
@@ -1398,7 +1398,7 @@ CHOICE. At least one of the following four is required
 
 ### **cdif:references**
 
-- **Cardinality:** Optional
+- **Cardinality:** Conditional — required unless `schema:description` is present. A domain must state its values either by naming the codelist that defines them or in prose.
 - **Content:** SKOS ConceptScheme inline, or [object reference](#object-reference)
 - **Description:** The codelist whose notation values define the allowed values of this enumeration domain.
 
@@ -1486,7 +1486,7 @@ CHOICE. At least one of the following four is required
 - **Content:** Array of Statistic value objects
 - **Description:** The value of the identified type of statistic. May be repeated to provide unweighted or weighted values and different computation bases.
 
-### **cdi:typeOfStatistic**
+### **cdif:typeOfStatistic**
 
 - **Cardinality:** Optional
 - **Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
@@ -1540,7 +1540,7 @@ CHOICE. At least one of the following four is required
 - **Content:** Array of Statistic value objects
 - **Description:** The value of the identified type of statistic. May be repeated to provide unweighted or weighted values and different computation bases.
 
-### **cdi:typeOfStatistic**
+### **cdif:typeOfStatistic**
 
 - **Cardinality:** Optional
 - **Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
@@ -1982,13 +1982,13 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 - **Content:** string
 - **Description:** Identifier for this AttributeComponent node
 
-### cdi:qualifies
+### cdif:qualifies
 
 - **Cardinality:** Optional
 - **Content:** array of one of: object, [object reference](#/$defs/CdifDataStructureComponent_id-reference)
 - **Description:** Reference to another variable in this dataset that this variable qualifies (provides additional context for; e.g. a measurement-channel attribute qualifying a measure variable).
 
-### cdi:identifier
+### cdif:identifier
 
 - **Cardinality:** Optional
 - **Content:** [object reference](#/$defs/Identifier)
@@ -2000,7 +2000,7 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 - **Content:** an inline cdi:RepresentedVariable, an inline cdi:InstanceVariable, or an object reference (@id) to either
 - **Description:** a link (object reference) to the variable that contains values for a data structure component
 
-### cdi:semantic
+### cdif:semantic
 
 - **Cardinality:** Optional
 - **Content:** array of one of: string, [object reference](#/$defs/CdifDataStructureComponent_cdifConceptOrTerm)
@@ -2114,13 +2114,13 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 - **Content:** string
 - **Description:** Identifier for this RepresentedVariable node
 
-### cdi:describedUnitOfMeasure
+### cdif:describedUnitOfMeasure
 
 - **Cardinality:** Optional
 - **Content:** one of: string, [object reference](#/$defs/cdifConceptOrTerm)
 - **Description:** The unit in which the data values are measured (kg, pound, euro), expressed as a value from a controlled system of entries (i.e., QDT). Supports the provision of an identifier for the entry in the authoritative source (a URI, etc.), and the specific vocabulary.
 
-### cdi:hasIntendedDataType
+### cdif:hasIntendedDataType
 
 - **Cardinality:** Optional
 - **Content:** one of: string, [object reference](#/$defs/cdifConceptOrTerm)
@@ -2156,7 +2156,7 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 - **Content:** one of: object, [object reference](#/$defs/CdifRepresentedVariable_id-reference)
 - **Description:** a unitType object or link (object reference) that specifies the kind of thing that is the subject of the variable values
 
-### cdi:unitOfMeasureKind
+### cdif:unitOfMeasureKind
 
 - **Cardinality:** Optional
 - **Content:** one of: string, [object reference](#/$defs/cdifConceptOrTerm)
@@ -2174,7 +2174,7 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 - **Content:** array of string
 - **Description:** A human-readable display label for the object for use in user interfaces.
 
-### cdi:identifier
+### cdif:identifier
 
 - **Cardinality:** Optional
 - **Content:** [object reference](#/$defs/Identifier)
@@ -2268,7 +2268,7 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 - **Content:** Array of [cdi:ComponentPosition](#cdicomponentposition) wrappers
 - **Description:** Ordered list of `cdi:ComponentPosition` wrappers, one per key component. Each wrapper holds a `cdi:value` (the 1-based integer position, default `1`) for its position, and `cdi:indexes` (an `@id`-reference to the variable used at that position in the key -- an inline variable definition is **not** permitted)
 
-### cdif:references
+### cdif:references_PrimaryKey
 
 - **Cardinality:** Required
 - **Content:** object reference (id-reference)
@@ -2349,7 +2349,7 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 - **Content:** array of string
 - **Description:** Human understandable name (linguistic signifier, word, phrase, or mnemonic). May follow ISO/IEC 11179-5 naming principles, and have context provided to specify usage.
 
-### cdi:identifier
+### cdif:identifier
 
 - **Cardinality:** Optional
 - **Content:** [object reference](#/$defs/Identifier)
@@ -2361,7 +2361,7 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 - **Content:** an inline cdi:RepresentedVariable, an inline cdi:InstanceVariable, or an object reference (@id) to either
 - **Description:** a link (object reference) to the variable that contains values for a data structure component
 
-### cdi:semantic
+### cdif:semantic
 
 - **Cardinality:** Optional
 - **Content:** array of one of: string, [object reference](#/$defs/CdifDataStructureComponent_cdifConceptOrTerm)
@@ -2403,13 +2403,13 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 - **Content:** [object reference](#/$defs/CdifDataStructureComponent_id-reference)
 - **Description:** link (object reference) to the variable that contains values for the descriptor.
 
-### cdi:identifier
+### cdif:identifier
 
 - **Cardinality:** Optional
 - **Content:** [object reference](#/$defs/Identifier)
 - **Description:** Identifier for objects requiring short- or long-lasting referencing and management.
 
-### cdi:semantic
+### cdif:semantic
 
 - **Cardinality:** Optional
 - **Content:** array of one of: string, [object reference](#/$defs/CdifDataStructureComponent_cdifConceptOrTerm)
@@ -2438,7 +2438,7 @@ Source profile directory: `_sources/profiles/cdifCompositeProfile/DiscoveryDataD
 - **Content:** an inline cdi:RepresentedVariable, an inline cdi:InstanceVariable, or an object reference (@id) to either
 - **Description:** a link (object reference) to the variable that contains values for a data structure component
 
-### cdi:semantic
+### cdif:semantic
 
 - **Cardinality:** Optional
 - **Content:** array of one of: string, object reference, or #/$defs/cdifConceptOrTerm.
