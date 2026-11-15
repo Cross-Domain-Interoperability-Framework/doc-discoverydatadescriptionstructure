@@ -14,10 +14,10 @@ This repository holds the published artifacts for the **CDIF Discovery / Data De
 
 A conforming catalog record declares, in its `dcterms:conformsTo`:
 
-- `https://w3id.org/cdif/core/1.1`
-- `https://w3id.org/cdif/discovery/1.1`
-- `https://w3id.org/cdif/data_description/1.1`
-- `https://w3id.org/cdif/data_structure/1.1`
+- `https://w3id.org/cdif/core/2.0`
+- `https://w3id.org/cdif/discovery/2.0`
+- `https://w3id.org/cdif/data_description/2.0`
+- `https://w3id.org/cdif/data_structure/2.0`
 
 ## Examples
 
